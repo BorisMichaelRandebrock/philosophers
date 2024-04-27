@@ -6,7 +6,7 @@
 /*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/27 15:21:19 by boris            ###   ########.fr       */
+/*   Updated: 2024/04/27 22:17:22 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct 		s_fork
 {
 	pthread_mutex_t fork;
 	int 			fork_id;
-	bool is_taken;
 }					t_fork;
 
 typedef struct 		s_philo
@@ -73,8 +72,8 @@ typedef struct 		s_philo
 	long			meals;
 	long			last_meal;
 	pthread_t 		thread_id;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
+	t_fork *left_fork;
+	t_fork *right_fork;
 	pthread_mutex_t	philo_mutex;
 	t_table			*table;
 }					t_philo;
@@ -100,8 +99,11 @@ typedef struct 		s_table
 void	pri_error(const char *str);
 void	print_colours(const char *str, const char *colour);
 int		ft_strlen(const char *str);
-//int		ft_atol(const char *str);
 void	error_parsing(t_table *table, char **argv);
+void	dinner_prep(t_table *table);
+void	mutex_handle(pthread_mutex_t *mutex, t_opcode opcode);
+
+
 //void	init_data(t_data *data, int argc, char **argv);
 //void	init_philos(t_data *data);
 // void	*philo_life(void *philo);
