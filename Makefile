@@ -6,7 +6,7 @@
 #    By: boris <boris@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/04/27 15:42:54 by boris            ###   ########.fr        #
+#    Updated: 2024/04/27 22:00:55 by boris            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = philosophers
 INC_DIR	= include/
 SRC_DIR = src/
 
-SRC = main.c utils.c error_parsing.c
+SRC = main.c utils.c error_parsing.c dinner_prep.c mutex_handle.c
 
 OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 
