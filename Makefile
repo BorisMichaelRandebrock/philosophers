@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
+#    By: boris <boris@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/04/25 19:13:36 by brandebr         ###   ########.fr        #
+#    Updated: 2024/04/27 15:42:54 by boris            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = philosophers
 INC_DIR	= include/
 SRC_DIR = src/
 
-SRC = main.c utils.c 
+SRC = main.c utils.c error_parsing.c
 
 OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 
@@ -33,7 +33,7 @@ RES		:=\033[0m
 all: Makefile $(NAME)
 
 tleaks: all
-	@$(TEST_LEAKS) ./$(NAME) 5 800 200 200 200 7
+	@$(TEST_LEAKS) ./$(NAME) 5 800 200 200 200
 # @$(TEST_LEAKS)./$(NAME) $(TEST_ARGS)
 
 %.o: %.c
