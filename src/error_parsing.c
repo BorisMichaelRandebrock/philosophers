@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:58:30 by boris             #+#    #+#             */
-/*   Updated: 2024/04/29 13:54:33 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:00:08 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ static long ft_atol(const char *str)
     return (res);
 }
 
+static void	meal_amounts(t_table *table, char *meals)
+{
+	table->amount_of_meals = ft_atol(meals);
+	if (table->amount_of_meals == 0)
+		print_error("As nobody wants to eat anything..\n"
+					" 				we wish you a very nice evening.");
+}
+
 void	error_parsing(t_table *table, char **argv)
 {
     (void)table;
@@ -50,10 +58,11 @@ void	error_parsing(t_table *table, char **argv)
             || table->time_to_sleep < 6e4)
         print_error("Error: Wrong time 🤬");
     if (argv[5])
-        table->amount_of_meals = ft_atol(argv[5]);
+		meal_amounts(table, argv[5]);
+       // table->amount_of_meals = ft_atol(argv[5]);
     else
         table->amount_of_meals = -1;
-    print_colours("Welcome to our lovely ", GREEN);
+    print_colours("\nWelcome to our lovely ", GREEN);
     print_colours("\"Chez Sartre\" 🍽️\n\n", YELLOW);
     print_colours("We hope that everything will be to your liking.\n", WHITE);
     print_colours("For now I shall leave you in the hands of ", WHITE);

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/29 14:47:56 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:55:47 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,20 @@
 static void clear_terminal()
 {
     printf("\033[2J\033[H");
-    fflush(stdout);
+  //  fflush(stdout);
 }
 
 static void conversation(void)
 {
 		usleep(6000000);
 		clear_terminal();
-		print_colours("Since everybody is seated...\n", WHITE);
+		print_colours("\nSince everybody is seated...\n", WHITE);
 		usleep(500000);
-		print_colours("& orders are taken:\n\n", WHITE);
+		print_colours("	& orders are taken:\n\n", WHITE);
 		usleep(500000);
 		print_colours("Lets start the Dinner ", GREEN);
-		printf("🍝");
+		printf("🍝\n");
+		usleep(6000000);
 }
 
 
@@ -43,9 +44,9 @@ int	main(int argc, char **argv)
 		dinner_prep(&table);
 		conversation();
 		//dinner_start(&table);
+
+		clear_terminal();
 		restaurant_closing(&table);
-
-
 	}
 	else
 		print_error("Error: Wrong number of arguments 🤬");

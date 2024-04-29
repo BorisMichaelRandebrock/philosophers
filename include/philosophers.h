@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/29 14:47:18 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:38:51 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <stdbool.h>
-#include <stdint.h>
+#include <unistd.h>
+//# include <sys/wait.h>
+#include <errno.h>
 
 # ifndef DEBUG
 #  define DEBUG 0

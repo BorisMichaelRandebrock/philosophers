@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dinner_ending.c                                    :+:      :+:    :+:   */
+/*   dinner_starting.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 14:42:32 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/29 18:54:22 by brandebr         ###   ########.fr       */
+/*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
+/*   Updated: 2024/04/29 17:15:41 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "colours.h"
 
-void	restaurant_closing(t_table *table)
+
+void dinner_start(t_table *table)
 {
-	print_colours("We hope you have enjoied the soirée, and we are\n"
-		 "		looking forward to be seeing you again "
-		 " very soon\n👋🏻\n", YELLOW);
-	free(table->forks);
-	free(table->philos);
+int		i;
+
+i = - 1;
+if (table->number_of_philosophers == 1)
+{
+
+}
 }
