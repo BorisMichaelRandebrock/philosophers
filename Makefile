@@ -3,26 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: boris <boris@student.42.fr>                +#+  +:+       +#+         #
+#    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/04/27 22:00:55 by boris            ###   ########.fr        #
+#    Updated: 2024/04/29 14:47:00 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAKEFLAGS 		+= --silent
+# MAKEFLAGS 		+= --silent
 NAME = philosophers
 
 INC_DIR	= include/
 SRC_DIR = src/
 
-SRC = main.c utils.c error_parsing.c dinner_prep.c mutex_handle.c
+SRC = main.c utils.c error_parsing.c dinner_prep.c mutex_handle.c dinner_ending.c 
 
 OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 
 CC = gcc
 TEST_LEAKS		:= leaks -atExit --
 TEST_ARGS ?= argv
+
+VALGRIND = valgrind -s
+VIKING =  valgrind  --leak-check=full
+RAGNAROK = valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes 
 
 FLAGS = -Wall -Wextra -Werror -g
 GREEN		:=\033[0;32m
@@ -33,8 +37,17 @@ RES		:=\033[0m
 all: Makefile $(NAME)
 
 tleaks: all
-	@$(TEST_LEAKS) ./$(NAME) 5 800 200 200 200
+	@$(TEST_LEAKS) ./$(NAME) 5 800 200 200 5
 # @$(TEST_LEAKS)./$(NAME) $(TEST_ARGS)
+
+valgrind: all
+	@$(VALGRIND) ./$(NAME) 5 800 200 200 5
+
+viking: all
+	@$(VIKING) ./$(NAME) 5 800 200 200 5
+
+ragnarok: all
+	@$(RAGNAROK) ./$(NAME) 5 800 200 200 5
 
 %.o: %.c
 	@$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS)

@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   dinner_ending.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/29 13:54:33 by brandebr         ###   ########.fr       */
+/*   Created: 2024/04/29 14:42:32 by brandebr          #+#    #+#             */
+/*   Updated: 2024/04/29 14:46:02 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "colours.h"
 
-int	ft_strlen(const char *str)
+void	restaurant_closing(t_table *table)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-void	print_error(const char *str)
-{
-	printf(RED"%s"RES, str);
-	exit(1);
-}
-
-void	print_colours(const char *str, const char *colour)
-{
-	printf("%s%s"RES, colour, str);
+	free(table->forks);
+	free(table->philos);
 }

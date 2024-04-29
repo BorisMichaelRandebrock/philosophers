@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_prep.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/04/27 22:19:12 by boris            ###   ########.fr       */
+/*   Updated: 2024/04/29 14:40:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,22 @@ void	dinner_prep(t_table *table)
 {
     int     i;
 
-    i = 0;
+    i = -1;
     table->end_dinner = false;
     table->threads_created = false;
     table->threads_runing = 0;
-    table->philos = malloc(sizeof(pthread_t) * table->number_of_philosophers);
+    table->philos = malloc(sizeof(t_philo) * table->number_of_philosophers);
+	if (!table->philos)
+		print_error("Malloc failed...");
     table->forks = malloc(sizeof(t_fork) * table->number_of_philosophers);
+	if (!table->forks)
+		print_error("Malloc failed...");
     mutex_handle(&table->print_mutex, INIT);
     mutex_handle(&table->table_mutex, INIT);
     while (++i < table->number_of_philosophers)
     {
         mutex_handle(&table->forks[i].fork, INIT);
         table->forks[i].fork_id = i;
-        i++;
     }
     philo_init(table);
 }

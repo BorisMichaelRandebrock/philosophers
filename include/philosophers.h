@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/27 22:17:22 by boris            ###   ########.fr       */
+/*   Updated: 2024/04/29 14:47:18 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # endif
 
 # ifndef PHILO_MAX
-#  define PHILO_MAX 200 
+#  define PHILO_MAX 200
 # endif
 
 typedef enum	e_state
@@ -96,12 +96,13 @@ typedef struct 		s_table
 	pthread_mutex_t print_mutex;
 }					t_table;
 
-void	pri_error(const char *str);
+void	print_error(const char *str);
 void	print_colours(const char *str, const char *colour);
 int		ft_strlen(const char *str);
 void	error_parsing(t_table *table, char **argv);
 void	dinner_prep(t_table *table);
 void	mutex_handle(pthread_mutex_t *mutex, t_opcode opcode);
+void	restaurant_closing(t_table *table);
 
 
 //void	init_data(t_data *data, int argc, char **argv);
