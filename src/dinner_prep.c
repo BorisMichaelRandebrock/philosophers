@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/04/29 14:40:50 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:46:44 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	dinner_prep(t_table *table)
     table->forks = malloc(sizeof(t_fork) * table->number_of_philosophers);
 	if (!table->forks)
 		print_error("Malloc failed...");
-    mutex_handle(&table->print_mutex, INIT);
-    mutex_handle(&table->table_mutex, INIT);
+    mutex_handle(table->table_mutex, INIT);
+  //  mutex_handle(&table->table_mutex, INIT);
     while (++i < table->number_of_philosophers)
     {
         mutex_handle(&table->forks[i].fork, INIT);

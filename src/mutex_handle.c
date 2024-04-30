@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:12:25 by boris             #+#    #+#             */
-/*   Updated: 2024/04/29 13:54:33 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:59:07 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void    mutex_error_check(int status, t_opcode opcode)
         print_error("Mutex is locked...");
 }
 
-void	mutex_handle(pthread_mutex_t *mutex, t_opcode opcode)
+void	mutex_handle(type_mtx *mutex, t_opcode opcode)
 {
     if (opcode == INIT)
         mutex_error_check(pthread_mutex_init(mutex, NULL), opcode);

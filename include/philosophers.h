@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/29 18:38:51 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:46:13 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ typedef enum 		e_opcode
 }					t_opcode;
 
 typedef struct s_table	t_table;
+typedef	pthread_mutex_t	type_mtx;
+
 
 typedef struct 		s_fork
 {
-	pthread_mutex_t fork;
+	type_mtx		fork;
 	int 			fork_id;
 }					t_fork;
 
@@ -74,9 +76,9 @@ typedef struct 		s_philo
 	long			meals;
 	long			last_meal;
 	pthread_t 		thread_id;
-	t_fork *left_fork;
-	t_fork *right_fork;
-	pthread_mutex_t	philo_mutex;
+	t_fork 			*left_fork;
+	t_fork 			*right_fork;
+	type_mtx		philo_mutex;
 	t_table			*table;
 }					t_philo;
 
@@ -94,8 +96,8 @@ typedef struct 		s_table
 	pthread_t		*waiter;
 	t_fork			*forks;
 	t_philo			*philos;
-	pthread_mutex_t table_mutex;
-	pthread_mutex_t print_mutex;
+	type_mtx		*table_mutex;
+	type_mtx 		print_mutex;
 }					t_table;
 
 void	print_error(const char *str);
@@ -103,7 +105,35 @@ void	print_colours(const char *str, const char *colour);
 int		ft_strlen(const char *str);
 void	error_parsing(t_table *table, char **argv);
 void	dinner_prep(t_table *table);
-void	mutex_handle(pthread_mutex_t *mutex, t_opcode opcode);
+void	mutex_handle(type_mtx *mutex, t_opcode opcode);
+void 	dinner_start(t_table *table);
+int		gettime(int time_type);
+
+
+
+void threading(
+	pthread_t *thread,
+	void *(*foo)(void *),
+	void *data,
+	t_opcode opccode
+);
+
+
+void	toggle_boolean(type_mtx *mutex, bool *dest, bool *value);
+void	dinner(void);
+bool	get_bool(type_mtx *mutex,  bool *value);
+void	wait_threads(t_table *table);
+void	increase_long(type_mtx *mutex, long *value);
+void	set_long(type_mtx *mutex, long *dest, long value);
+long	get_long(type_mtx *mutex, long *value);
+void	set_bool(type_mtx *mutex, bool *dest, bool value);
+
+void	single_philo(void *arg);
+void	print_status(t_philosophers_state state, t_philo *philo);
+void	reporter(t_philosophers_state state, t_philo *philo);
+
+
+
 void	restaurant_closing(t_table *table);
 
 

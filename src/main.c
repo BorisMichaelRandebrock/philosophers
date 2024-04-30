@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/29 18:55:47 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:26:40 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 	{
 		t_table table;
 
+		clear_terminal();
 		error_parsing(&table, argv);
 		dinner_prep(&table);
 		conversation();
