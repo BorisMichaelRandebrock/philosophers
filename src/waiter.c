@@ -6,20 +6,30 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 16:16:46 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:51:42 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-bool all_threads_created(type_mtx *mutex, long *threads,
-							long number_of_philosophers)
+void	philo_thinks(t_philo *philo)
 {
-	mutex_handle(&mutex, LOCK);
-	if (*threads == number_of_philosophers)
-		return (true);
-	return (false);
+	long	eat;
+	long	sleep;
+	long	think;
+
+	reporter(THINKING, philo);
+	if (philo->table->number_of_philosophers % 2 == 0)
+		return ;
+	eat = philo->table->time_to_eat;
+	sleep = philo->table->time_to_sleep;
+	think = (eat * 2) - sleep;
+	if (think < 0)
+		think = 0;
+	precise_usleep((think * 1e3), philo->table);
+
 }
+
 static bool	philo_dies(t_philo *philo)
 {
 	long	time;
@@ -35,22 +45,34 @@ static bool	philo_dies(t_philo *philo)
 		return (true);
 	return (false);
 }
-
-void	set_bool(type_mtx *mutex, bool *dest, bool value)
+void philo_eats(t_philo *philo)
 {
-	mutex_handle(&mutex, LOCK);
-	*dest = value;
-	mutex_handle(&mutex, UNLOCK);
+	mutex_handle(&philo->left_fork, LOCK);
+	reporter(TAKE_LEFT_FORK, philo);
+	mutex_handle(&philo->right_fork, LOCK);
+	reporter(TAKE_RIGHT_FORK, philo);
+	set_long(&philo->philo_mutex, &philo->last_meal, gettime(MILLISECONDS));
+	philo->meals++;
+	reporter(EATING, philo);
+	precise_usleep(philo->table->time_to_eat, philo->table);
+	if (philo->table->amount_of_meals > 0
+		&& philo->meals >= philo->table->amount_of_meals)
+		set_bool(&philo->philo_mutex, &philo->full, true);
+	mutex_handle(&philo->left_fork, UNLOCK);
+	mutex_handle(&philo->right_fork, UNLOCK);
+	// set_long(&philo->philo_mutex, &philo->meals, get_long(
+			//		&philo->philo_mutex, &philo->meals) + 1);
+	// mutex_handle(&philo->philo_mutex, UNLOCK);
 }
 
-void	waitig_dinner(void *data)
+void	wait_dinner(void *data)
 {
 	int		i;
 	t_table *table;
 
 	while (!all_threads_created(&table->table_mutex, table->threads_runing,
 								table->number_of_philosophers))
-								;
+			;
 	while (!dinner_finished(table))
 	{
 		i =-1;

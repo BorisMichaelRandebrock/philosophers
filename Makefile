@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/04/30 16:35:40 by brandebr         ###   ########.fr        #
+#    Updated: 2024/04/30 18:26:05 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ NAME = philosophers
 INC_DIR	= include/
 SRC_DIR = src/
 
-SRC = main.c utils.c error_parsing.c dinner_prep.c mutex_handle.c dinner_ending.c\
-		dinner_starting.c
+SRC = main.c print_utils.c error_parsing.c dinner_prep.c mutex_handle.c dinner_ending.c\
+		dinner_starting.c setters_getters.c waiter.c sync_utils.c
 
 OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 

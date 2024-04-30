@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 16:46:13 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:16:12 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ void	set_bool(type_mtx *mutex, bool *dest, bool value);
 void	single_philo(void *arg);
 void	print_status(t_philosophers_state state, t_philo *philo);
 void	reporter(t_philosophers_state state, t_philo *philo);
+void	wait_dinner(void *data);
+
 
 
 
