@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:12:25 by boris             #+#    #+#             */
-/*   Updated: 2024/04/30 11:59:07 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:11:27 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void    mutex_error_check(int status, t_opcode opcode)
 {
     if (status == 0)
         return ;
-    if (EINVAL == status && (opcode == LOCK || opcode == UNLOCK))
+    if (status == EINVAL && (opcode == LOCK || opcode == UNLOCK))
         print_error("The mutex value is invalid 😓");
-    else if (EINVAL == status && opcode == INIT)
+    else if (status == EINVAL && opcode == INIT)
         print_error("The value specified by mutex is invalid ... 🥺");
-    else if (EDEADLK == status)
+    else if (status == EDEADLK)
         print_error("Deadlock danger... 😱");
-    else if (EPERM == status)
+    else if (status == EPERM)
         print_error("The current thread does not hold a lock on mutex.");
     else if (status == ENOMEM)
         print_error("Not enough memory to initialize the mutex... 🫥");

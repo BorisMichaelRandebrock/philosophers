@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   waiter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 18:51:42 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:54:21 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	philo_thinks(t_philo *philo)
 	think = (eat * 2) - sleep;
 	if (think < 0)
 		think = 0;
-	precise_usleep((think * 1e3), philo->table);
+	precise_usleep((think * 42), philo->table);
 
 }
 
-static bool	philo_dies(t_philo *philo)
+bool	philo_dies(t_philo *philo)
 {
 	long	time;
 	long 	time_to_die;
@@ -45,7 +45,7 @@ static bool	philo_dies(t_philo *philo)
 		return (true);
 	return (false);
 }
-void philo_eats(t_philo *philo)
+void	philo_eats(t_philo *philo)
 {
 	mutex_handle(&philo->left_fork, LOCK);
 	reporter(TAKE_LEFT_FORK, philo);
@@ -63,6 +63,12 @@ void philo_eats(t_philo *philo)
 	// set_long(&philo->philo_mutex, &philo->meals, get_long(
 			//		&philo->philo_mutex, &philo->meals) + 1);
 	// mutex_handle(&philo->philo_mutex, UNLOCK);
+}
+bool	dinner_finished(t_table *table)
+{
+	if (table->end_dinner == true)
+		return (true);
+	return (false);
 }
 
 void	wait_dinner(void *data)

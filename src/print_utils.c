@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 18:31:24 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:04:05 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+
 void	print_error(const char *str)
 {
 	printf(RED"%s"RES, str);
@@ -32,6 +33,7 @@ void	print_colours(const char *str, const char *colour)
 {
 	printf("%s%s"RES, colour, str);
 }
+
 void	reporter(t_philosophers_state state, t_philo *philo)
 {
 	long	time;

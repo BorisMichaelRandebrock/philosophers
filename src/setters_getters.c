@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   setters_getters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:59:59 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:11:10 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:46:00 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
 
 
 void	set_bool(type_mtx *mutex, bool *dest, bool value)
