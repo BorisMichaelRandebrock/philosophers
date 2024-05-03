@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 16:26:40 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:09:29 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "colours.h"
 
-static void clear_terminal()
+void clear_terminal()
 {
     printf("\033[2J\033[H");
   //  fflush(stdout);
@@ -32,10 +32,8 @@ static void conversation(void)
 		usleep(6000000);
 }
 
-
 int	main(int argc, char **argv)
 {
-	(void)argv;
 	if (argc >= 5 && argc <= 6)
 	{
 		t_table table;
@@ -44,8 +42,7 @@ int	main(int argc, char **argv)
 		error_parsing(&table, argv);
 		dinner_prep(&table);
 		conversation();
-		//dinner_start(&table);
-
+		dinner_start(&table);
 		clear_terminal();
 		restaurant_closing(&table);
 	}

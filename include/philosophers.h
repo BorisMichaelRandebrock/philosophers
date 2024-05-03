@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 17:16:12 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:56:51 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct 		s_fork
 
 typedef struct 		s_philo
 {
-	int				id;
+	pthread_t		id;
 	bool			full;
 	long			meals;
 	long			last_meal;
@@ -100,55 +100,63 @@ typedef struct 		s_table
 	type_mtx 		print_mutex;
 }					t_table;
 
+
+
+
+
+
+
+// ->main.c
+void 	clear_terminal();
+
+// ->error_parsing.c
+void	error_parsing(t_table *table, char **argv);
+
+// ->print_utils.c
+int		ft_strlen(const char *str);
 void	print_error(const char *str);
 void	print_colours(const char *str, const char *colour);
-int		ft_strlen(const char *str);
-void	error_parsing(t_table *table, char **argv);
+void	reporter(t_philosophers_state state, t_philo *philo);
+
+// ->dinner_prep.c
 void	dinner_prep(t_table *table);
+
+// ->mutex_handle.c
 void	mutex_handle(type_mtx *mutex, t_opcode opcode);
+
+// ->dinner_starting.c
+void	single_philo(void *arg);
+void	*dinner(void *arg);
+void	precise_usleep(long usec, t_table *table);
 void 	dinner_start(t_table *table);
-int		gettime(int time_type);
 
+// ->threading.c
+void threading(pthread_t *thread, void *(*foo)(void *), void *data,
+	t_opcode opccode);
+void *single_philo_wrapper(void *arg);
+//void threading(pthread_t *thread, void *(*foo)(void *), void *data,
 
-
-void threading(
-	pthread_t *thread,
-	void *(*foo)(void *),
-	void *data,
-	t_opcode opccode
-);
-
-
-void	toggle_boolean(type_mtx *mutex, bool *dest, bool *value);
-void	dinner(void);
+// ->setters_getters.c
+void	set_bool(type_mtx *mutex, bool *dest, bool value);
 bool	get_bool(type_mtx *mutex,  bool *value);
-void	wait_threads(t_table *table);
-void	increase_long(type_mtx *mutex, long *value);
 void	set_long(type_mtx *mutex, long *dest, long value);
 long	get_long(type_mtx *mutex, long *value);
-void	set_bool(type_mtx *mutex, bool *dest, bool value);
+int		gettime(int time_type);
 
-void	single_philo(void *arg);
-void	print_status(t_philosophers_state state, t_philo *philo);
-void	reporter(t_philosophers_state state, t_philo *philo);
+// ->sync_utils.c
+void	even_odd(t_philo *philo);
+void	wait_threads(t_table *table);
+void	increase_long(type_mtx *mutex, long *value);
+
+
+// ->waiter.c
+void	philo_thinks(t_philo *philo);
+bool	philo_dies(t_philo *philo);
+void	philo_eats(t_philo *philo);
+bool	dinner_finished(t_table *table);
 void	wait_dinner(void *data);
 
-
-
-
+// ->dinner_ending.c
 void	restaurant_closing(t_table *table);
-
-
-//void	init_data(t_data *data, int argc, char **argv);
-//void	init_philos(t_data *data);
-// void	*philo_life(void *philo);
-// void	philo_eat(t_philo *philo);
-// void	philo_sleep(t_philo *philo);
-// void	philo_think(t_philo *philo);
-// void	philo_dead(t_philo *philo);
-// void	philo_take_forks(t_philo *philo);
-// void	philo_drop_forks(t_philo *philo);
-// void	philo_print(t_philo *philo, char *str);
-// int		get_time(struct timeval start);
 
 #endif

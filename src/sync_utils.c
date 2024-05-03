@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sync_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:34:04 by brandebr          #+#    #+#             */
-/*   Updated: 2024/04/30 18:24:39 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:56:46 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	even_odd(t_philo *philo)
 	if (philo->table->number_of_philosophers % 2 == 0)
 	{
 		if (philo->id % 2 == 0)
-			preci_sleep(3e4, philo->table);
+			precise_usleep(3e4, philo->table);
 	}
 	else
 	{

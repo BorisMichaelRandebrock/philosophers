@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
+/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:58:30 by boris             #+#    #+#             */
-/*   Updated: 2024/04/30 16:28:17 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:26:39 by boris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static void	meal_amounts(t_table *table, char *meals)
 
 void	error_parsing(t_table *table, char **argv)
 {
-    (void)table;
-    (void)argv;
     table->number_of_philosophers = ft_atol(argv[1]);
     if (table->number_of_philosophers < 2 || table->number_of_philosophers >
             PHILO_MAX)
