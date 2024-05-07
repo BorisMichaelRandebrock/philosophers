@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/04/30 16:46:44 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:26:16 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 
 static void	philo_init(t_table *table)
 {
-    int     i;
+    long     i;
     t_philo *philo;
 
     i = -1;

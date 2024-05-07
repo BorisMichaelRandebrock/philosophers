@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   waiter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/01 17:54:21 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/07 11:16:18 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	philo_dies(t_philo *philo)
 	long 	time_to_die;
 
 	if (get_bool(&philo->philo_mutex, &philo->full))
-		return ;
+		return (false);
 	long current_time = gettime(MILLISECONDS);
 	long last_meal_time = get_long(&philo->philo_mutex, &philo->last_meal);
 	time = current_time - last_meal_time;
@@ -47,9 +47,9 @@ bool	philo_dies(t_philo *philo)
 }
 void	philo_eats(t_philo *philo)
 {
-	mutex_handle(&philo->left_fork, LOCK);
+	mutex_handle(&philo->left_fork->fork, LOCK);
 	reporter(TAKE_LEFT_FORK, philo);
-	mutex_handle(&philo->right_fork, LOCK);
+	mutex_handle(&philo->right_fork->fork, LOCK);
 	reporter(TAKE_RIGHT_FORK, philo);
 	set_long(&philo->philo_mutex, &philo->last_meal, gettime(MILLISECONDS));
 	philo->meals++;
@@ -58,8 +58,8 @@ void	philo_eats(t_philo *philo)
 	if (philo->table->amount_of_meals > 0
 		&& philo->meals >= philo->table->amount_of_meals)
 		set_bool(&philo->philo_mutex, &philo->full, true);
-	mutex_handle(&philo->left_fork, UNLOCK);
-	mutex_handle(&philo->right_fork, UNLOCK);
+	mutex_handle(&philo->left_fork->fork, UNLOCK);
+	mutex_handle(&philo->right_fork->fork, UNLOCK);
 	// set_long(&philo->philo_mutex, &philo->meals, get_long(
 			//		&philo->philo_mutex, &philo->meals) + 1);
 	// mutex_handle(&philo->philo_mutex, UNLOCK);
@@ -76,7 +76,8 @@ void	wait_dinner(void *data)
 	int		i;
 	t_table *table;
 
-	while (!all_threads_created(&table->table_mutex, table->threads_runing,
+	table = (t_table *)data;
+	while (!all_threads_created(&table->table_mutex, &table->threads_runing,
 								table->number_of_philosophers))
 			;
 	while (!dinner_finished(table))
@@ -91,5 +92,5 @@ void	wait_dinner(void *data)
 			}
 		}
 	}
-	return (NULL);
+//	return (NULL);
 }
