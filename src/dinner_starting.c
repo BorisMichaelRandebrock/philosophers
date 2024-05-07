@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/03 14:44:41 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:37:22 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void dinner_start(t_table *table)
 		//threading(&table->philos[0].id, single_philo, &table->philos[0], CREATE);
 		 //threading(&table->philos[0].philo_mutex, single_philo,
 		 threading(&table->philos->thread_id, single_philo_wrapper,
-		 &table->philos[0], CREATE);
+		 		&table->philos[0], CREATE);
 		// threading(&table->philos[0].id, single_philo, &table->philos[0], CREATE);
 	else
 	{
