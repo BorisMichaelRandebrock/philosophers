@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/07 11:16:18 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:51:07 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	wait_dinner(void *data)
 	t_table *table;
 
 	table = (t_table *)data;
-	while (!all_threads_created(&table->table_mutex, &table->threads_runing,
+	while (!all_threads_created(table->table_mutex, &table->threads_runing,
 								table->number_of_philosophers))
 			;
 	while (!dinner_finished(table))
@@ -87,7 +87,7 @@ void	wait_dinner(void *data)
 		{
 			if (philo_dies(table->philos + i))
 			{
-				set_bool(&table->table_mutex, &table->end_dinner, true);
+				set_bool(table->table_mutex, &table->end_dinner, true);
 				reporter(DEAD, table->philos + i);
 			}
 		}
