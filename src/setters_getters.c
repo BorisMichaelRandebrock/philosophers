@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:59:59 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/08 13:38:35 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/08 18:00:46 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,21 @@ long	get_long(type_mtx *mutex, long *value)
 	return (return_value);
 }
 
-int	gettime()
+long	gettime()
 {
-	struct timeval	time_val;
+	struct	timeval	time_val;
+	long	current_time;
 
 	if (gettimeofday(&time_val, NULL) != 0)
 	{
 		print_error("Error: gettimeofday failed... ⏱");
 		return (1337);
 	}
-	return ((time_val.tv_sec * 1000) + (time_val.tv_usec / 1000));
+	current_time = (time_val.tv_sec * 1000) + (time_val.tv_usec / 1000);
+	return (current_time);
 }
 /*
+
 int	gettime(int time_type)
 {
 	struct timeval	time;
@@ -78,5 +81,4 @@ int	gettime(int time_type)
 			"Please use MILLISECONDS, MICROSECONDS or SECONDS");
 	return (1337);
 }
-
 */
