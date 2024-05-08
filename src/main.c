@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/01 16:09:29 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/08 14:11:56 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void clear_terminal()
 
 static void conversation(void)
 {
-		usleep(6000000);
+	//	usleep(6000000);TODO undo the comments
 		clear_terminal();
 		print_colours("\nSince everybody is seated...\n", WHITE);
-		usleep(500000);
+	//	usleep(500000);
 		print_colours("	& orders are taken:\n\n", WHITE);
-		usleep(500000);
+	//	usleep(500000);
 		print_colours("Lets start the Dinner ", GREEN);
 		printf("🍝\n");
-		usleep(6000000);
+	//	usleep(600000);
 }
 
 int	main(int argc, char **argv)
@@ -43,8 +43,7 @@ int	main(int argc, char **argv)
 		dinner_prep(&table);
 		conversation();
 		dinner_start(&table);
-		clear_terminal();
-		restaurant_closing(&table);
+	//	restaurant_closing(&table);
 	}
 	else
 		print_error("Error: Wrong number of arguments 🤬");

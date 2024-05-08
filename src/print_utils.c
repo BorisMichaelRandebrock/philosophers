@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/03 14:51:20 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/08 13:04:48 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 {
 	long	time;
 
-	time = gettime(MILLISECONDS) - philo->table->start_dinner;
+	time = gettime(MICROSECONDS) - philo->table->start_dinner;
+	mutex_handle(&philo->table->print_mutex, LOCK);
 	if (get_bool(&philo->philo_mutex, &philo->full))
 		return ;
 	else
@@ -55,6 +56,6 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 		else if (state == DEAD && philo->table->end_dinner == false)
 			printf("%ld %ld died... 💀\n", time, philo->id);
 	}
-	mutex_handle(&philo->table->print_mutex, UNLOCK);//TODO  donot know what to do here
+	mutex_handle(&philo->table->print_mutex, UNLOCK);
 }
 

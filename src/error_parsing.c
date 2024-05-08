@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:58:30 by boris             #+#    #+#             */
-/*   Updated: 2024/05/01 15:26:39 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/08 14:21:16 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,23 @@ static void	meal_amounts(t_table *table, char *meals)
 	table->amount_of_meals = ft_atol(meals);
 	if (table->amount_of_meals == 0)
 		print_error("As nobody wants to eat anything..\n"
-					" 				we wish you a very nice evening.");
+					" 				we wish you a very nice evening.\n");
 }
 
 void	error_parsing(t_table *table, char **argv)
 {
     table->number_of_philosophers = ft_atol(argv[1]);
-    if (table->number_of_philosophers < 2 || table->number_of_philosophers >
+    if (table->number_of_philosophers < 1 || table->number_of_philosophers >
             PHILO_MAX)
-        print_error("Error: Wrong number of philosophers 🤬");
+        print_error("Error: Wrong number of philosophers 🤬\n");
     table->time_to_die = ft_atol(argv[2]) *1e3;
     table->time_to_eat = ft_atol(argv[3]) *1e3;
     table->time_to_sleep = ft_atol(argv[4]) *1e3;
     if (table->time_to_die < 6e4 || table->time_to_eat < 6e4
             || table->time_to_sleep < 6e4)
-        print_error("Error: Wrong time 🤬");
+        print_error("Error: Wrong time 🤬\n");
     if (argv[5])
 		meal_amounts(table, argv[5]);
-       // table->amount_of_meals = ft_atol(argv[5]);
     else
         table->amount_of_meals = -1;
     print_colours("\nWelcome to our lovely ", GREEN);
