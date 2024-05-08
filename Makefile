@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: boris <boris@student.42.fr>                +#+  +:+       +#+         #
+#    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/05/01 16:09:19 by boris            ###   ########.fr        #
+#    Updated: 2024/05/07 14:39:16 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INC_DIR	= include/
 SRC_DIR = src/
 
 SRC = main.c print_utils.c error_parsing.c dinner_prep.c mutex_handle.c dinner_ending.c\
-		dinner_starting.c setters_getters.c waiter.c sync_utils.c
+		dinner_starting.c setters_getters.c waiter.c sync_utils.c threading.c 
 
 OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 

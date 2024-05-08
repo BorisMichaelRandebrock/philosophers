@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/01 15:04:05 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/03 14:51:20 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 	{
 		if ((state == TAKE_LEFT_FORK || state == TAKE_RIGHT_FORK)
 			&& philo->table->end_dinner == false)
-			printf("%ld %d  has taken a fork ⋔\n", time, philo->id);
+			printf("%ld %ld  has taken a fork ⋔\n", time, philo->id);
 		else if (state == EATING && philo->table->end_dinner == false)
-			printf("%ld %d is eating... 🍝\n", time, philo->id);
+			printf("%ld %ld is eating... 🍝\n", time, philo->id);
 		else if (state == SLEEPING && philo->table->end_dinner == false)
-			printf("%ld %d is sleeping... 💤\n", time, philo->id);
+			printf("%ld %ld is sleeping... 💤\n", time, philo->id);
 		else if (state == THINKING && philo->table->end_dinner == false)
-			printf("%ld %d is thinking... 💭\n", time, philo->id);
+			printf("%ld %ld is thinking... 💭\n", time, philo->id);
 		else if (state == DEAD && philo->table->end_dinner == false)
-			printf("%ld %d died... 💀\n", time, philo->id);
+			printf("%ld %ld died... 💀\n", time, philo->id);
 	}
-	mutex_handle(&philo->table->print_mutex, UNLOCK);
+	mutex_handle(&philo->table->print_mutex, UNLOCK);//TODO  donot know what to do here
 }
 

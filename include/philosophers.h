@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/01 17:56:51 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/07 11:18:24 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct 		s_fork
 
 typedef struct 		s_philo
 {
-	pthread_t		id;
+	long			id;
 	bool			full;
 	long			meals;
 	long			last_meal;
@@ -147,6 +147,8 @@ int		gettime(int time_type);
 void	even_odd(t_philo *philo);
 void	wait_threads(t_table *table);
 void	increase_long(type_mtx *mutex, long *value);
+bool 	all_threads_created(type_mtx *mutex, long *threads,
+							long number_of_philosophers);
 
 
 // ->waiter.c

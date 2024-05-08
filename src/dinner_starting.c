@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_starting.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/01 17:58:22 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/07 14:37:22 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,15 @@ void dinner_start(t_table *table)
 	if (table->number_of_philosophers == 1)
 		//threading(&table->philos[0].id, single_philo, &table->philos[0], CREATE);
 		 //threading(&table->philos[0].philo_mutex, single_philo,
-		 threading(&table->philos[0].id, single_philo_wrapper, &table->philos[0], CREATE);
+		 threading(&table->philos->thread_id, single_philo_wrapper,
+		 		&table->philos[0], CREATE);
 		// threading(&table->philos[0].id, single_philo, &table->philos[0], CREATE);
 	else
 	{
 		while (++i < table->number_of_philosophers)
-			threading(&table->philos[i].id, dinner, &table->philos[i], CREATE);
+			threading(&table->philos->thread_id, dinner, &table->philos[i], CREATE);
 	}
-	threading(table->waiter, wait_dinner, table, CREATE);
+	threading(table->waiter, (void *(*)(void *))wait_dinner, table, CREATE);
 	table->start_dinner = gettime(MILLISECONDS);
 	set_bool(table->table_mutex, &table->threads_created, true);
 	i = -1;

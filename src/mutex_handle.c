@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:12:25 by boris             #+#    #+#             */
-/*   Updated: 2024/05/01 16:11:27 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/07 11:02:19 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ static void    mutex_error_check(int status, t_opcode opcode)
 
 void	mutex_handle(type_mtx *mutex, t_opcode opcode)
 {
-    if (opcode == INIT)
-        mutex_error_check(pthread_mutex_init(mutex, NULL), opcode);
-    else if (opcode == LOCK)
+	if (opcode == LOCK)
         mutex_error_check(pthread_mutex_lock(mutex), opcode);
     else if (opcode == UNLOCK)
         mutex_error_check(pthread_mutex_unlock(mutex), opcode);
+    else if (opcode == INIT)
+        mutex_error_check(pthread_mutex_init(mutex, NULL), opcode);
     else if (opcode == DESTROY)
         mutex_error_check(pthread_mutex_destroy(mutex), opcode);
     else
