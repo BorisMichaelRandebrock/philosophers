@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_ending.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:42:32 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/01 14:08:31 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/08 14:20:02 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,20 @@
 
 void	restaurant_closing(t_table *table)
 {
+	t_philo	*philo;
+	int		i;
+
+	i = -1;
+	while (++i < table->number_of_philosophers)
+	{
+		philo = table->philos + i;
+		mutex_handle(&philo->philo_mutex, DESTROY);
+	}
+	mutex_handle(&table->print_mutex, DESTROY);
+	mutex_handle(table->table_mutex, DESTROY);
 	print_colours("We hope you have enjoied the soirée, and shall\n"
-		 "		be delighted to be seeing you again very soon...\n", YELLOW);
-		 printf("👋🏻\n");
+		 "		be delighted to be seeing you again very soon...\n", GREEN);
+		 printf("😃\n");
 	free(table->forks);
 	free(table->philos);
 }

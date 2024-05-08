@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/07 11:18:24 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:40:20 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,13 @@ typedef struct 		s_table
 	long			start_dinner;
 	bool			end_dinner;
 	bool			threads_created;
-	long			threads_runing;
+	bool			threads_runing;
 	pthread_t		*waiter;
 	t_fork			*forks;
 	t_philo			*philos;
 	type_mtx		*table_mutex;
 	type_mtx 		print_mutex;
 }					t_table;
-
-
-
-
-
-
 
 // ->main.c
 void 	clear_terminal();
@@ -134,14 +128,14 @@ void 	dinner_start(t_table *table);
 void threading(pthread_t *thread, void *(*foo)(void *), void *data,
 	t_opcode opccode);
 void *single_philo_wrapper(void *arg);
-//void threading(pthread_t *thread, void *(*foo)(void *), void *data,
 
 // ->setters_getters.c
 void	set_bool(type_mtx *mutex, bool *dest, bool value);
 bool	get_bool(type_mtx *mutex,  bool *value);
 void	set_long(type_mtx *mutex, long *dest, long value);
 long	get_long(type_mtx *mutex, long *value);
-int		gettime(int time_type);
+int		gettime();
+// int		gettime(int time_type);
 
 // ->sync_utils.c
 void	even_odd(t_philo *philo);
