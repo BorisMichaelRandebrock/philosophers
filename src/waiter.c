@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/07 11:51:07 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/08 16:41:55 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	philo_dies(t_philo *philo)
 
 	if (get_bool(&philo->philo_mutex, &philo->full))
 		return (false);
-	long current_time = gettime(MILLISECONDS);
+	long current_time = gettime(MICROSECONDS);
 	long last_meal_time = get_long(&philo->philo_mutex, &philo->last_meal);
 	time = current_time - last_meal_time;
 	time_to_die = philo->table->time_to_die / 1e3;
@@ -51,7 +51,7 @@ void	philo_eats(t_philo *philo)
 	reporter(TAKE_LEFT_FORK, philo);
 	mutex_handle(&philo->right_fork->fork, LOCK);
 	reporter(TAKE_RIGHT_FORK, philo);
-	set_long(&philo->philo_mutex, &philo->last_meal, gettime(MILLISECONDS));
+	set_long(&philo->philo_mutex, &philo->last_meal, gettime(MICROSECONDS));
 	philo->meals++;
 	reporter(EATING, philo);
 	precise_usleep(philo->table->time_to_eat, philo->table);

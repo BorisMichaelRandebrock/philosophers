@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/08 14:40:20 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/08 18:00:46 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct 		s_table
 	long			start_dinner;
 	bool			end_dinner;
 	bool			threads_created;
-	bool			threads_runing;
+	long			threads_runing;
 	pthread_t		*waiter;
 	t_fork			*forks;
 	t_philo			*philos;
@@ -134,8 +134,8 @@ void	set_bool(type_mtx *mutex, bool *dest, bool value);
 bool	get_bool(type_mtx *mutex,  bool *value);
 void	set_long(type_mtx *mutex, long *dest, long value);
 long	get_long(type_mtx *mutex, long *value);
-int		gettime();
-// int		gettime(int time_type);
+long	gettime();
+//int		gettimes(int time_type);
 
 // ->sync_utils.c
 void	even_odd(t_philo *philo);
