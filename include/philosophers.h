@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 14:21:56 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:52:41 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,11 @@ bool 	all_threads_created(type_mtx *mutex, long *threads,
 
 
 // ->waiter.c
-void	philo_thinks(t_philo *philo);
+void	philo_thinks(t_philo *philo, bool initial);
 bool	philo_dies(t_philo *philo);
 void	philo_eats(t_philo *philo);
 bool	dinner_finished(t_table *table);
-void	wait_dinner(void *data);
+void	*wait_dinner(void *data);
 
 // ->dinner_ending.c
 void	restaurant_closing(t_table *table);

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 15:40:13 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:54:11 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*dinner(void *arg)
 		reporter(SLEEPING, philo);
 		usleep(philo->table->time_to_sleep);
 //		precise_usleep(philo->table->time_to_sleep, philo->table);
-		philo_thinks(philo);
+		philo_thinks(philo, false);
 	}
 	return (NULL);
 }
@@ -104,7 +104,7 @@ void	dinner_start(t_table *table)
 					threading(&table->philos[i].thread_id, dinner, &table->philos[i], CREATE);
 	}
 	threading(&table->waiter, (void *(*)(void *))wait_dinner, table, CREATE);
-	printf("--------here i am: %p\n",(void *(*)(void *))wait_dinner);
+	// printf("--------here i am: %p\n",(void *(*)(void *))wait_dinner);
 	set_bool(&table->table_mutex, &table->threads_created, true);
 	i = -1;
 	while (++i < table->number_of_philosophers)

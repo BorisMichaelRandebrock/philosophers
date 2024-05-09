@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 11:08:19 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:19:16 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void conversation(void)
 	//	usleep(500000);
 		print_colours("	& orders are taken:\n\n", WHITE);
 	//	usleep(500000);
-		print_colours("Lets start the Dinner ", GREEN);
+		print_colours("Let's start the Dinner ", GREEN);
 		printf("🍝\n");
 	//	usleep(600000);
 }

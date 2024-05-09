@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:58:30 by boris             #+#    #+#             */
-/*   Updated: 2024/05/08 14:21:16 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:11:05 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	error_parsing(t_table *table, char **argv)
     if (table->number_of_philosophers < 1 || table->number_of_philosophers >
             PHILO_MAX)
         print_error("Error: Wrong number of philosophers 🤬\n");
-    table->time_to_die = ft_atol(argv[2]) *1e3;
-    table->time_to_eat = ft_atol(argv[3]) *1e3;
-    table->time_to_sleep = ft_atol(argv[4]) *1e3;
+    table->time_to_die = ft_atol(argv[2]) * 1000;
+    table->time_to_eat = ft_atol(argv[3]) * 1000;
+    table->time_to_sleep = ft_atol(argv[4]) * 1000;
     if (table->time_to_die < 6e4 || table->time_to_eat < 6e4
             || table->time_to_sleep < 6e4)
         print_error("Error: Wrong time 🤬\n");

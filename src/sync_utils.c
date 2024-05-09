@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:34:04 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 15:52:49 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:04:23 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ void	even_odd(t_philo *philo)
 	{
 		if (philo->id % 2 == 0)
 			usleep(200);
-		//printf("...");
 			//precise_usleep(3e4, philo->table);
 	}
 	else
 	{
 		if (philo->id % 2)
-			philo_thinks(philo);
+			philo_thinks(philo, true);
 	}
 }
 void	wait_threads(t_table *table)
