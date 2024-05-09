@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/08 14:11:56 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:08:19 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void clear_terminal()
 
 static void conversation(void)
 {
-	//	usleep(6000000);TODO undo the comments
+		//usleep(6000000);//TODO undo the comments
 		clear_terminal();
 		print_colours("\nSince everybody is seated...\n", WHITE);
 	//	usleep(500000);

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   theading.c                                         :+:      :+:    :+:   */
+/*   threading.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boris <boris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:03:14 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/01 17:39:47 by boris            ###   ########.fr       */
+/*   Updated: 2024/05/09 12:54:25 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void *single_philo_wrapper(void *arg) 
+void *single_philo_wrapper(void *arg)
 {
     single_philo(arg);
-    return NULL; 
+    return NULL;
 }
 
 
@@ -63,11 +63,20 @@ static void handle_thread_error(int status, t_opcode opcode)
 }
 
 
+// static void	*_philo_loop(t_philo *philo)
+// {
+// 	//cilo de vida
+
+// 	return(philo);
+// }
+
+
 void	threading(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_opcode opcode)
 {
 	if (opcode == CREATE)
 		handle_thread_error(pthread_create(thread, NULL, foo, data), opcode);
+//handle_thread_error(pthread_create(thread, _philo_loop, NULL, data), opcode);
 	else if (opcode == JOIN)
 		handle_thread_error(pthread_join(*thread, NULL), opcode);
 	else if (opcode == DETACH)

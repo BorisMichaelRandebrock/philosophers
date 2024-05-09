@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/08 16:41:55 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:43:43 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	philo_thinks(t_philo *philo)
 	think = (eat * 2) - sleep;
 	if (think < 0)
 		think = 0;
-	precise_usleep((think * 42), philo->table);
+	usleep(think * 42);
+	//precise_usleep((think * 42), philo->table);
 
 }
 
@@ -54,7 +55,8 @@ void	philo_eats(t_philo *philo)
 	set_long(&philo->philo_mutex, &philo->last_meal, gettime(MICROSECONDS));
 	philo->meals++;
 	reporter(EATING, philo);
-	precise_usleep(philo->table->time_to_eat, philo->table);
+	usleep(philo->table->time_to_eat/1000);
+//	precise_usleep(philo->table->time_to_eat, philo->table);
 	if (philo->table->amount_of_meals > 0
 		&& philo->meals >= philo->table->amount_of_meals)
 		set_bool(&philo->philo_mutex, &philo->full, true);
@@ -77,7 +79,7 @@ void	wait_dinner(void *data)
 	t_table *table;
 
 	table = (t_table *)data;
-	while (!all_threads_created(table->table_mutex, &table->threads_runing,
+	while (!all_threads_created(&table->table_mutex, &table->numb_threads_runing,
 								table->number_of_philosophers))
 			;
 	while (!dinner_finished(table))
@@ -87,7 +89,7 @@ void	wait_dinner(void *data)
 		{
 			if (philo_dies(table->philos + i))
 			{
-				set_bool(table->table_mutex, &table->end_dinner, true);
+				set_bool(&table->table_mutex, &table->end_dinner, true);
 				reporter(DEAD, table->philos + i);
 			}
 		}

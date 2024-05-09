@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/08 18:00:46 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:21:56 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ typedef struct 		s_table
 	long			amount_of_meals;
 	long			number_of_philosophers;
 	long			start_dinner;
+	long			numb_threads_runing;
 	bool			end_dinner;
 	bool			threads_created;
-	long			threads_runing;
-	pthread_t		*waiter;
+	pthread_t		waiter;
 	t_fork			*forks;
 	t_philo			*philos;
-	type_mtx		*table_mutex;
+	type_mtx		table_mutex;
 	type_mtx 		print_mutex;
 }					t_table;
 
@@ -119,7 +119,7 @@ void	dinner_prep(t_table *table);
 void	mutex_handle(type_mtx *mutex, t_opcode opcode);
 
 // ->dinner_starting.c
-void	single_philo(void *arg);
+void	*single_philo(void *arg);
 void	*dinner(void *arg);
 void	precise_usleep(long usec, t_table *table);
 void 	dinner_start(t_table *table);
