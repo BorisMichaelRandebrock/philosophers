@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/05/08 13:24:38 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:30:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,17 @@ void	dinner_prep(t_table *table)
 	int		i;
 
 	i = -1;
+	table->philos_full = 0;
 	table->end_dinner = false;
 	table->threads_created = false;
-	table->threads_runing = 0;
+	table->numb_threads_runing = 0;
 	table->philos = malloc(sizeof(t_philo) * table->number_of_philosophers);
 	if (!table->philos)
 		print_error("Malloc failed...");
 	table->forks = malloc(sizeof(t_fork) * table->number_of_philosophers);
 	if (!table->forks)
 		print_error("Malloc failed...");
-	mutex_handle(table->table_mutex, INIT);
+	mutex_handle(&table->table_mutex, INIT);
 	mutex_handle(&table->print_mutex, INIT);
 	while (++i < table->number_of_philosophers)
 	{

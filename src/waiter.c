@@ -6,27 +6,29 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/08 16:41:55 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:42:25 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	philo_thinks(t_philo *philo)
+void	philo_thinks(t_philo *philo, bool initial)
 {
 	long	eat;
-	long	sleep;
+	long	sleeps;
 	long	think;
 
-	reporter(THINKING, philo);
+	if (initial)
+		reporter(THINKING, philo);
 	if (philo->table->number_of_philosophers % 2 == 0)
 		return ;
 	eat = philo->table->time_to_eat;
-	sleep = philo->table->time_to_sleep;
-	think = (eat * 2) - sleep;
+	sleeps = philo->table->time_to_sleep;
+	think = (eat * 2) - sleeps;
 	if (think < 0)
 		think = 0;
-	precise_usleep((think * 42), philo->table);
+	usleep(think/* * 42*/);
+	//precise_usleep((think * 42), philo->table);
 
 }
 
@@ -37,10 +39,10 @@ bool	philo_dies(t_philo *philo)
 
 	if (get_bool(&philo->philo_mutex, &philo->full))
 		return (false);
-	long current_time = gettime(MICROSECONDS);
+	long current_time = gettime();
 	long last_meal_time = get_long(&philo->philo_mutex, &philo->last_meal);
 	time = current_time - last_meal_time;
-	time_to_die = philo->table->time_to_die / 1e3;
+	time_to_die = philo->table->time_to_die / 1000;
 	if (time > time_to_die)
 		return (true);
 	return (false);
@@ -51,19 +53,23 @@ void	philo_eats(t_philo *philo)
 	reporter(TAKE_LEFT_FORK, philo);
 	mutex_handle(&philo->right_fork->fork, LOCK);
 	reporter(TAKE_RIGHT_FORK, philo);
-	set_long(&philo->philo_mutex, &philo->last_meal, gettime(MICROSECONDS));
+	set_long(&philo->philo_mutex, &philo->last_meal, gettime());
 	philo->meals++;
 	reporter(EATING, philo);
-	precise_usleep(philo->table->time_to_eat, philo->table);
+	usleep(philo->table->time_to_eat/1000);
+//	precise_usleep(philo->table->time_to_eat, philo->table);
 	if (philo->table->amount_of_meals > 0
-		&& philo->meals >= philo->table->amount_of_meals)
+		&& philo->meals == philo->table->amount_of_meals)
+	{
 		set_bool(&philo->philo_mutex, &philo->full, true);
+			philo->table->philos_full++;//?? TODO sigue
+			//printf("amount of full philos: %ld\n", philo->table->philos_full);
+			//philo_thinks(philo, true);
+	}
 	mutex_handle(&philo->left_fork->fork, UNLOCK);
 	mutex_handle(&philo->right_fork->fork, UNLOCK);
-	// set_long(&philo->philo_mutex, &philo->meals, get_long(
-			//		&philo->philo_mutex, &philo->meals) + 1);
-	// mutex_handle(&philo->philo_mutex, UNLOCK);
 }
+
 bool	dinner_finished(t_table *table)
 {
 	if (table->end_dinner == true)
@@ -71,13 +77,13 @@ bool	dinner_finished(t_table *table)
 	return (false);
 }
 
-void	wait_dinner(void *data)
+void	*wait_dinner(void *data)
 {
 	int		i;
 	t_table *table;
 
 	table = (t_table *)data;
-	while (!all_threads_created(table->table_mutex, &table->threads_runing,
+	while (!all_threads_created(&table->table_mutex, &table->numb_threads_runing,
 								table->number_of_philosophers))
 			;
 	while (!dinner_finished(table))
@@ -87,10 +93,17 @@ void	wait_dinner(void *data)
 		{
 			if (philo_dies(table->philos + i))
 			{
-				set_bool(table->table_mutex, &table->end_dinner, true);
+				set_bool(&table->table_mutex, &table->end_dinner, true);
 				reporter(DEAD, table->philos + i);
+				restaurant_closing(table);
+			}
+			else if (table->amount_of_meals > 0
+				&& table->philos_full == table->number_of_philosophers)
+			{
+				set_bool(&table->table_mutex, &table->end_dinner, true);
+				restaurant_closing(table);
 			}
 		}
 	}
-//	return (NULL);
+	return (NULL);
 }

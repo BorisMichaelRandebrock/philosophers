@@ -6,12 +6,12 @@
 #    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/05/07 14:39:16 by brandebr         ###   ########.fr        #
+#    Updated: 2024/05/10 10:39:57 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # MAKEFLAGS 		+= --silent
-NAME = philosophers
+NAME = philo
 
 INC_DIR	= include/
 SRC_DIR = src/
@@ -21,7 +21,7 @@ SRC = main.c print_utils.c error_parsing.c dinner_prep.c mutex_handle.c dinner_e
 
 OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 
-CC = gcc
+CC = gcc -g
 TEST_LEAKS		:= leaks -atExit --
 TEST_ARGS ?= argv
 
@@ -29,7 +29,7 @@ VALGRIND = valgrind -s
 VIKING =  valgrind  --leak-check=full
 RAGNAROK = valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes 
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
 GREEN		:=\033[0;32m
 RED		:=\033[0;31m
 BLUE		:=\033[0;34m
@@ -38,7 +38,7 @@ RES		:=\033[0m
 all: Makefile $(NAME)
 
 tleaks: all
-	@$(TEST_LEAKS) ./$(NAME) 5 800 200 200 5
+	@$(TEST_LEAKS) ./$(NAME) 1 800 200 200 5
 # @$(TEST_LEAKS)./$(NAME) $(TEST_ARGS)
 
 valgrind: all

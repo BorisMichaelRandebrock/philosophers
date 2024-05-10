@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/08 18:00:46 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:22:10 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct 		s_fork
 
 typedef struct 		s_philo
 {
-	long			id;
 	bool			full;
+	long			id;
 	long			meals;
 	long			last_meal;
 	pthread_t 		thread_id;
@@ -89,14 +89,15 @@ typedef struct 		s_table
 	long			time_to_sleep;
 	long			amount_of_meals;
 	long			number_of_philosophers;
+	long			philos_full;
 	long			start_dinner;
+	long			numb_threads_runing;
 	bool			end_dinner;
 	bool			threads_created;
-	long			threads_runing;
-	pthread_t		*waiter;
+	pthread_t		waiter;
 	t_fork			*forks;
 	t_philo			*philos;
-	type_mtx		*table_mutex;
+	type_mtx		table_mutex;
 	type_mtx 		print_mutex;
 }					t_table;
 
@@ -119,7 +120,7 @@ void	dinner_prep(t_table *table);
 void	mutex_handle(type_mtx *mutex, t_opcode opcode);
 
 // ->dinner_starting.c
-void	single_philo(void *arg);
+void	*single_philo(void *arg);
 void	*dinner(void *arg);
 void	precise_usleep(long usec, t_table *table);
 void 	dinner_start(t_table *table);
@@ -146,11 +147,11 @@ bool 	all_threads_created(type_mtx *mutex, long *threads,
 
 
 // ->waiter.c
-void	philo_thinks(t_philo *philo);
+void	philo_thinks(t_philo *philo, bool initial);
 bool	philo_dies(t_philo *philo);
 void	philo_eats(t_philo *philo);
 bool	dinner_finished(t_table *table);
-void	wait_dinner(void *data);
+void	*wait_dinner(void *data);
 
 // ->dinner_ending.c
 void	restaurant_closing(t_table *table);
