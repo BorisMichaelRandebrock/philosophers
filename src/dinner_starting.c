@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:54:11 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:41:33 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,24 @@ void	*single_philo(void *arg)
 void	*dinner(void *arg)
 {
 	t_philo	*philo;
+	t_table	*table;
 
 	philo = (t_philo *)arg;
+	table = philo->table;
 	wait_threads(philo->table);
 	set_long(&philo->philo_mutex, &philo->last_meal, gettime());
 	increase_long(&philo->table->table_mutex, &philo->table->numb_threads_runing);
 	even_odd(philo);
 	while (!dinner_finished(philo->table))
 	{
-		if (get_bool(&philo->philo_mutex, &philo->full))
-			break ;
+		// if (table->number_of_philosophers == table->philos_full) //TODOO  sigue
+		// 	restaurant_closing(philo->table);
+		if (get_bool(&philo->philo_mutex, &philo->full) || table->philos_full
+		 	== table->number_of_philosophers)
+		{
+			//printf("philo 55555555 %ld full\n", table->philos_full);
+			restaurant_closing(philo->table);
+		}
 		philo_eats(philo);
 		reporter(SLEEPING, philo);
 		usleep(philo->table->time_to_sleep);
@@ -104,7 +112,6 @@ void	dinner_start(t_table *table)
 					threading(&table->philos[i].thread_id, dinner, &table->philos[i], CREATE);
 	}
 	threading(&table->waiter, (void *(*)(void *))wait_dinner, table, CREATE);
-	// printf("--------here i am: %p\n",(void *(*)(void *))wait_dinner);
 	set_bool(&table->table_mutex, &table->threads_created, true);
 	i = -1;
 	while (++i < table->number_of_philosophers)
@@ -114,33 +121,4 @@ void	dinner_start(t_table *table)
 	set_bool(&table->table_mutex, &table->end_dinner, true);
 	threading(&table->waiter, NULL, NULL, JOIN);
 }
-
-// void dinner_start(t_table *table)
-// {
-// 	int		i;
-
-// 	i = - 1;
-// 	table->start_dinner = gettime();
-// 	if (table->number_of_philosophers == 1)
-// 			lonely_dinner(&table->philos[0]);
-// 	else
-// 	{
-
-// 		while (++i < table->number_of_philosophers)
-// 		{
-// 			threading(&table->philos->thread_id, dinner, &table->philos[i], CREATE);
-// 			 printf("philo %d\n", i);
-// 		}
-// 	}
-// 	wait_threads(table);
-// 	//threading(table->waiter, wait_dinner, table, CREATE);
-// 	threading(table->waiter, (void *(*)(void *))wait_dinner, table, CREATE);
-// 	table->start_dinner = gettime();
-// 	set_bool(table->table_mutex, &table->threads_created, true);
-// 	i = -1;
-// 	while (++i < table->number_of_philosophers)
-// 		threading(&table->philos[i].thread_id, NULL, NULL, JOIN);
-// 	set_bool(table->table_mutex, &table->end_dinner, true);
-// 	threading(table->waiter, NULL, NULL, JOIN);
-// }
 

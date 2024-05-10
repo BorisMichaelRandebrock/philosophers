@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:52:41 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:22:10 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct 		s_fork
 
 typedef struct 		s_philo
 {
-	long			id;
 	bool			full;
+	long			id;
 	long			meals;
 	long			last_meal;
 	pthread_t 		thread_id;
@@ -89,6 +89,7 @@ typedef struct 		s_table
 	long			time_to_sleep;
 	long			amount_of_meals;
 	long			number_of_philosophers;
+	long			philos_full;
 	long			start_dinner;
 	long			numb_threads_runing;
 	bool			end_dinner;

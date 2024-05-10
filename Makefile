@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/05/09 13:01:37 by brandebr         ###   ########.fr        #
+#    Updated: 2024/05/10 10:39:57 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ VALGRIND = valgrind -s
 VIKING =  valgrind  --leak-check=full
 RAGNAROK = valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes 
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
 GREEN		:=\033[0;32m
 RED		:=\033[0;31m
 BLUE		:=\033[0;34m

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 16:52:49 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:42:25 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,17 @@ void	philo_eats(t_philo *philo)
 	usleep(philo->table->time_to_eat/1000);
 //	precise_usleep(philo->table->time_to_eat, philo->table);
 	if (philo->table->amount_of_meals > 0
-		&& philo->meals >= philo->table->amount_of_meals)
+		&& philo->meals == philo->table->amount_of_meals)
+	{
 		set_bool(&philo->philo_mutex, &philo->full, true);
+			philo->table->philos_full++;//?? TODO sigue
+			//printf("amount of full philos: %ld\n", philo->table->philos_full);
+			//philo_thinks(philo, true);
+	}
 	mutex_handle(&philo->left_fork->fork, UNLOCK);
 	mutex_handle(&philo->right_fork->fork, UNLOCK);
-	// set_long(&philo->philo_mutex, &philo->meals, get_long(
-			//		&philo->philo_mutex, &philo->meals) + 1);
-	// mutex_handle(&philo->philo_mutex, UNLOCK);
 }
+
 bool	dinner_finished(t_table *table)
 {
 	if (table->end_dinner == true)
@@ -92,6 +95,13 @@ void	*wait_dinner(void *data)
 			{
 				set_bool(&table->table_mutex, &table->end_dinner, true);
 				reporter(DEAD, table->philos + i);
+				restaurant_closing(table);
+			}
+			else if (table->amount_of_meals > 0
+				&& table->philos_full == table->number_of_philosophers)
+			{
+				set_bool(&table->table_mutex, &table->end_dinner, true);
+				restaurant_closing(table);
 			}
 		}
 	}

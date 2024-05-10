@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/05/09 13:51:10 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:30:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	dinner_prep(t_table *table)
 	int		i;
 
 	i = -1;
+	table->philos_full = 0;
 	table->end_dinner = false;
 	table->threads_created = false;
 	table->numb_threads_runing = 0;

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 17:00:20 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:43:42 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 	long	time;
 
 	time = gettime() - philo->table->start_dinner;
+	//printf("Tiasdfghjkme: %ld\n", time);
 	mutex_handle(&philo->table->print_mutex, LOCK);
 	if (get_bool(&philo->philo_mutex, &philo->full))
 		return ;
@@ -48,7 +49,8 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 			&& philo->table->end_dinner == false)
 			printf("Time: %-10ld %ld has taken a fork ⋔\n", time, philo->id);
 		else if (state == EATING && philo->table->end_dinner == false)
-			printf("Time: %-10ld %ld is eating... 🍝 %ld\n", time, philo->id, philo->meals);//TODO
+			printf("Time: %-10ld %ld is eating... 🍝\n", time, philo->id);//TODO
+			//printf("Time: %-10ld %ld is eating... 🍝 %ld\n", time, philo->id, philo->meals);//TODO
 		else if (state == SLEEPING && philo->table->end_dinner == false)
 			printf("Time: %-10ld %ld is sleeping... 💤\n", time, philo->id);
 		else if (state == THINKING && philo->table->end_dinner == false)
