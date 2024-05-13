@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/10 10:41:33 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:03:17 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	lonely_dinner(t_philo *philo)
 	reporter(DEAD, philo);
 	philo_dies(philo);
 	mutex_handle(&philo->philo_mutex, DESTROY);
-	restaurant_closing(philo->table);
+	funeral(philo->table);
 	return ;
 }
 

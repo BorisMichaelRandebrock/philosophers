@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/10 10:42:25 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:50:45 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	*wait_dinner(void *data)
 			{
 				set_bool(&table->table_mutex, &table->end_dinner, true);
 				reporter(DEAD, table->philos + i);
-				restaurant_closing(table);
+				funeral(table);
 			}
 			else if (table->amount_of_meals > 0
 				&& table->philos_full == table->number_of_philosophers)

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 18:22:10 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:43:57 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,6 @@ void	*wait_dinner(void *data);
 
 // ->dinner_ending.c
 void	restaurant_closing(t_table *table);
+void	funeral(t_table *table);
 
 #endif
