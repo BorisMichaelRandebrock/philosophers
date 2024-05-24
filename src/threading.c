@@ -6,17 +6,17 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:03:14 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/09 12:54:25 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:22:48 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void *single_philo_wrapper(void *arg)
+/* void *single_philo_wrapper(void *arg)
 {
     single_philo(arg);
     return NULL;
-}
+} */
 
 
 // void	threading(pthread_t *thread, void *(*foo)(void *),

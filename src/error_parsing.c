@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:58:30 by boris             #+#    #+#             */
-/*   Updated: 2024/05/09 17:11:05 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:26:39 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	error_parsing(t_table *table, char **argv)
     print_colours("Maximus", BLUE);
     print_colours(", your Maître, he will take care of "
 	 				"your every needs.. \n\n", WHITE);
-    print_colours("Enjoy your stay!\n", MAGENTA);
+    print_colours("We hope you will enjoy your stay!\n", DARK_RED);
 }

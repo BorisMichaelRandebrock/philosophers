@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/05/09 17:30:50 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/23 17:33:21 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	philo_init(t_table *table)
 		philo->table = table;
 		assign_forks(philo, table->forks, i);
 	}
-	table->threads_created = true;
+	//table->threads_created = true; //TODOO
 }
 
 void	dinner_prep(t_table *table)

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:36:06 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/13 17:43:57 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/23 17:22:36 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	dinner_prep(t_table *table);
 void	mutex_handle(type_mtx *mutex, t_opcode opcode);
 
 // ->dinner_starting.c
-void	*single_philo(void *arg);
 void	*dinner(void *arg);
 void	precise_usleep(long usec, t_table *table);
 void 	dinner_start(t_table *table);
@@ -128,7 +127,6 @@ void 	dinner_start(t_table *table);
 // ->threading.c
 void threading(pthread_t *thread, void *(*foo)(void *), void *data,
 	t_opcode opccode);
-void *single_philo_wrapper(void *arg);
 
 // ->setters_getters.c
 void	set_bool(type_mtx *mutex, bool *dest, bool value);
@@ -144,7 +142,6 @@ void	wait_threads(t_table *table);
 void	increase_long(type_mtx *mutex, long *value);
 bool 	all_threads_created(type_mtx *mutex, long *threads,
 							long number_of_philosophers);
-
 
 // ->waiter.c
 void	philo_thinks(t_philo *philo, bool initial);

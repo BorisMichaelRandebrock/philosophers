@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:42:32 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/13 17:42:33 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:57:43 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	funeral(t_table *table)
 	mutex_handle(&table->table_mutex, DESTROY);
 	print_colours("We are deeply saddened by the loss of our valued guest.\n"
 		"    Our thoughts are with their loved ones during this difficult time.\n"
-		"	  We are here to offer any support and assistance we can.\n", RED);
-		 printf("✞\n");
+		"	  We are here to offer any support and assistance we can.\n", MAGENTA);
+		 printf("			✞\n");
 	free(table->forks);
 	free(table->philos);
 	exit(0);

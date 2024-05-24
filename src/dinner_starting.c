@@ -6,14 +6,14 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/13 18:03:17 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/23 17:15:53 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "colours.h"
 
-static void	lonely_dinner(t_philo *philo)
+/* static void	lonely_dinner(t_philo *philo)
 {
 	printf("Pilosopher %ld: ", philo->id);
 	print_colours("..., am I the only one?..\n", YELLOW);
@@ -23,27 +23,29 @@ static void	lonely_dinner(t_philo *philo)
 	mutex_handle(&philo->philo_mutex, INIT);
 	//wait_threads(philo->table);
 	reporter(TAKE_LEFT_FORK, philo);
+	usleep(philo->table->time_to_die);
 	//sleep(philo->table->time_to_die / 100000);
-	precise_usleep(philo->table->time_to_die / 1000, philo->table);
+	//precise_usleep(philo->table->time_to_die / 1000, philo->table);
 	reporter(DEAD, philo);
 	philo_dies(philo);
 	mutex_handle(&philo->philo_mutex, DESTROY);
 	funeral(philo->table);
 	return ;
-}
+} */
 
-void	*single_philo(void *arg)
+static void	*lonely_dinner(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	wait_threads(philo->table);
+	printf("Pilosopher %ld: ", philo->id);
+	print_colours("..., am I the only one?..\n", YELLOW);
 	set_long(&philo->philo_mutex, &philo->last_meal, gettime());
 	increase_long(&philo->table->table_mutex, &philo->table->numb_threads_runing);
 	reporter(TAKE_LEFT_FORK, philo);
 	while (!dinner_finished(philo->table))
 		usleep(200);
-		//precise_usleep(200, philo->table);
 	return (NULL);
 }
 
@@ -60,13 +62,14 @@ void	*dinner(void *arg)
 	even_odd(philo);
 	while (!dinner_finished(philo->table))
 	{
-		// if (table->number_of_philosophers == table->philos_full) //TODOO  sigue
+	//if (table->number_of_philosophers == table->philos_full) //TODOO  sigue
 		// 	restaurant_closing(philo->table);
-		if (get_bool(&philo->philo_mutex, &philo->full) || table->philos_full
-		 	== table->number_of_philosophers)
+		if (get_bool(&philo->philo_mutex, &philo->full) /*|| table->philos_full
+		 	== table->number_of_philosophers*/)
 		{
+			break ;
 			//printf("philo 55555555 %ld full\n", table->philos_full);
-			restaurant_closing(philo->table);
+			//restaurant_closing(philo->table);
 		}
 		philo_eats(philo);
 		reporter(SLEEPING, philo);
@@ -105,13 +108,15 @@ void	dinner_start(t_table *table)
 	i = -1;
 	table->start_dinner = gettime();
 	if (table->number_of_philosophers == 1)
-		lonely_dinner(&table->philos[0]);
+		threading(&table->philos[0].thread_id, lonely_dinner, &table->philos[0],
+		CREATE);
 	else
 	{
 		while (++i < table->number_of_philosophers)
-					threading(&table->philos[i].thread_id, dinner, &table->philos[i], CREATE);
+			threading(&table->philos[i].thread_id, dinner, &table->philos[i], CREATE);
 	}
-	threading(&table->waiter, (void *(*)(void *))wait_dinner, table, CREATE);
+	threading(&table->waiter, wait_dinner, table, CREATE);
+	table->start_dinner = gettime();
 	set_bool(&table->table_mutex, &table->threads_created, true);
 	i = -1;
 	while (++i < table->number_of_philosophers)
