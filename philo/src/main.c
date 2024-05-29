@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 16:49:09 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:19:49 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,14 @@ void clear_terminal()
 
 static void conversation(void)
 {
-		//usleep(6000000);//TODO undo the comments
-		//clear_terminal();
+		/* usleep(6000000);//TODO undo the comments
+		clear_terminal(); */
 		print_colours("\nSince everybody is seated...\n", WHITE);
 		// usleep(800000);
 		print_colours("	& orders are taken:\n\n", WHITE);
 		// usleep(800000);
 		print_colours("Let's start the Dinner ", GREEN);
 		printf("🍝\n");
-		//printf("rtghmolgjhb");
-
 		// usleep(1000000);
 }
 /*

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 16:27:46 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:28:37 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,16 @@ void	waiter(t_table *table)
 	i = 0;
 	while (i < table->number_of_philosophers)
 	{
-		if (philo_dies(&table->philos[i]))
-		{
-			reporter(DEAD, &table->philos[i]);
-			funeral(table);
-		}
-		else if (table->number_of_philosophers == table->philos_full -1)
+		if (table->number_of_philosophers == table->philos_full -1)
 		{
 			// table->end_dinner = 1;
 			set_bool(&table->table_mutex, &table->end_dinner, true);
 			restaurant_closing(table);
+		}
+		else if (philo_dies(&table->philos[i]))
+		{
+			reporter(DEAD, &table->philos[i]);
+			funeral(table);
 		}
 		i++;
 		if (table->number_of_philosophers == i)

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 15:53:55 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:36:36 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void lonely_dinner(t_philo *philo)
 	// mutex_handle(&philo->left_fork->fork, LOCK);
 	// mutex_handle(&philo->right_fork->fork, LOCK);
 	reporter(TAKE_LEFT_FORK, philo);
+	//usleep(philo->table->time_to_die);
 	precise_usleep(philo->table->time_to_die);
 	//precise_usleep(philo->table->time_to_die);
 	// mutex_handle(&philo->left_fork->fork, UNLOCK);
@@ -95,11 +96,14 @@ static void	dinner_party(t_philo *philo)
 	//set_long(&philo->philo_mutex, &philo->last_meal, (philo->last_meal + 1));
 	set_long(&philo->philo_mutex, &philo->last_meal,
 		gettime(&philo->table->start_dinner));
-	precise_usleep(philo->table->time_to_eat);
+	usleep(philo->table->time_to_eat);
+
+	//precise_usleep(philo->table->time_to_eat);
 	mutex_handle(&philo->left_fork->fork, UNLOCK);
 	mutex_handle(&philo->right_fork->fork, UNLOCK);
 	reporter(SLEEPING, philo);
-	precise_usleep(philo->table->time_to_sleep);
+	usleep(philo->table->time_to_sleep);
+	//precise_usleep(philo->table->time_to_sleep);
 	reporter(THINKING, philo);
 }
 
@@ -107,8 +111,9 @@ void	*dinner_rules(void *table)
 {
 	t_philo	*philo;
 	philo = (t_philo *)table;
-	if (philo->id % 2 != 0)
-		precise_usleep(philo->table->time_to_eat / 10000);
+	if (philo->id % 2 == 0)
+		usleep(philo->table->time_to_eat / 1000);
+		//precise_usleep(philo->table->time_to_eat / 1000);
 	while (!philo->table->end_dinner)
 	{
 	if (philo->table->number_of_philosophers == 1)
