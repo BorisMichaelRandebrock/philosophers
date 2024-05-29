@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 14:43:53 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:53:55 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,16 @@ static void lonely_dinner(t_philo *philo)
 // }
 static void	dinner_party(t_philo *philo)
 {
+	if (philo->meals == philo->table->amount_of_meals)
+	{
+		set_bool(&philo->philo_mutex, &philo->full, true);
+		mutex_handle(&philo->table->table_mutex, LOCK);
+		philo->table->philos_full++;
+		set_long(&philo->table->full_mtx, &philo->table->philos_full,
+			philo->table->philos_full + 1);
+		mutex_handle(&philo->table->table_mutex, UNLOCK);
+		return ;
+	}
 	mutex_handle(&philo->left_fork->fork, LOCK);
 	reporter(TAKE_LEFT_FORK, philo);
 	mutex_handle(&philo->right_fork->fork, LOCK);
@@ -83,13 +93,6 @@ static void	dinner_party(t_philo *philo)
 	reporter(EATING, philo);
 	philo->meals++;
 	//set_long(&philo->philo_mutex, &philo->last_meal, (philo->last_meal + 1));
-	if (philo->meals == philo->table->amount_of_meals)
-	{
-		mutex_handle(&philo->table->table_mutex, LOCK);
-		set_long(&philo->table->full_mtx, &philo->table->philos_full,
-			philo->table->philos_full + 1);
-		mutex_handle(&philo->table->table_mutex, UNLOCK);
-	}
 	set_long(&philo->philo_mutex, &philo->last_meal,
 		gettime(&philo->table->start_dinner));
 	precise_usleep(philo->table->time_to_eat);

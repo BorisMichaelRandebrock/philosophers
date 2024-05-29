@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 12:24:57 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:02:48 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 		else if (state == EATING && !philo->table->end_dinner)
 			//printf("Time: %-10ld %ld is eating... 🍝\n", time, philo->id);//TODO
 			printf("Time: %-10ld %ld is eating... 🍝 %ld\n", time, philo->id,
-			philo->meals);//TODO
+			(philo->meals +1));//TODO
 		else if (state == SLEEPING && !philo->table->end_dinner)
 			printf("Time: %-10ld %ld is sleeping... 💤\n", time, philo->id);
 		else if (state == THINKING && !philo->table->end_dinner)

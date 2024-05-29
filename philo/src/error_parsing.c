@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:58:30 by boris             #+#    #+#             */
-/*   Updated: 2024/05/28 13:27:45 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:37:55 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	error_parsing(t_table *table, char **argv)
     table->time_to_die = ft_atol(argv[2]) * 1000;
     table->time_to_eat = ft_atol(argv[3]) * 1000;
     table->time_to_sleep = ft_atol(argv[4]) * 1000;
-    if (table->time_to_die < 6e4 || table->time_to_eat < 6e4
-            || table->time_to_sleep < 6e4)
+    if (table->time_to_die < 60000|| table->time_to_eat < 60000
+            || table->time_to_sleep < 60000)
         print_error("Error: Wrong time 🤬\n");
     if (argv[5])
 		meal_amounts(table, argv[5]);

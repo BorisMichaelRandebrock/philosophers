@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 14:41:19 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:27:46 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ bool	philo_dies(t_philo *philo)
 	// printf("Time: %-10ld %ld has put down right philo.h ⋔\n", gettime() - philo->table->start_dinner, philo->id);
 } */
 
-bool	dinner_finished(t_table *table)
+/* bool	dinner_finished(t_table *table)
 {
 	if (table->end_dinner == 1)
 		return (1);
 	return (0);
-}
+} */
 
 void	waiter(t_table *table)
 {
@@ -95,7 +95,7 @@ void	waiter(t_table *table)
 			reporter(DEAD, &table->philos[i]);
 			funeral(table);
 		}
-		if (table->amount_of_meals == table->philos_full)
+		else if (table->number_of_philosophers == table->philos_full -1)
 		{
 			// table->end_dinner = 1;
 			set_bool(&table->table_mutex, &table->end_dinner, true);
