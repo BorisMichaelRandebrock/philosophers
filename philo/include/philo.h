@@ -38,7 +38,8 @@ typedef enum e_state
 	SLEEPING,
 	TAKE_LEFT_FORK,
 	TAKE_RIGHT_FORK,
-	DEAD
+	DEAD,
+	BREAK
 } t_philosophers_state;
 
 typedef enum e_time
@@ -89,7 +90,7 @@ typedef struct s_table
 	long time_to_eat;
 	long time_to_sleep;
 	long amount_of_meals;
-	long end_dinner;
+	bool end_dinner;
 	long philos_full;
 	long start_dinner;
 	// long numb_threads_runing;
@@ -129,7 +130,7 @@ int mutex_handle(type_mtx *mutex, t_opcode opcode);
 //void	*single_philo(void *arg);
 //void *dinner(void *arg);
 //void	lonely_dinner(t_philo *philo);
-int		dinner_start(t_table *table);
+void	*dinner_start(void *table);
 void	*dinner_rules(void *data);
 
 // ->threading.c

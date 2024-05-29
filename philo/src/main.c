@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/27 18:33:05 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:57:19 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void clear_terminal()
 {
-    printf("\033[2J\033[H");
+	write(1,"\033[2J\033[H", 8);
+   // printf("\033[2J\033[H");
   //  fflush(stdout);
 }
 
@@ -29,6 +30,8 @@ static void conversation(void)
 		//usleep(500000);
 		print_colours("Let's start the Dinner ", GREEN);
 		printf("🍝\n");
+		//printf("rtghmolgjhb");
+
 	//	usleep(600000);
 }
 /*
@@ -60,13 +63,14 @@ int	main(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_table	table;
+	clear_terminal();
 	if (argc < 5 || argc > 6)
 		print_error("Error: Wrong number of arguments");
-	clear_terminal();
 	error_parsing(&table, argv);
 	conversation();
-	if (init_table(&table) != 0)
+	init_table(&table);
+	/* if (init_table(&table) != 0)
 		restaurant_closing(&table);
-	table.start_dinner = gettime(0);
+ */	//table.start_dinner = gettime(0);
 	waiter(&table);
 }

@@ -6,12 +6,11 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/27 19:34:23 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:24:57 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "philo"
 #include "colours.h"
 
 int	ft_strlen(const char *str)
@@ -32,7 +31,12 @@ void	print_error(const char *str)
 
 void	print_colours(const char *str, const char *colour)
 {
-	printf("%s%s"RES, colour, str);
+	(void)colour;
+	(void)str;
+	write(1, colour, ft_strlen(colour));
+	write(1, str, ft_strlen(str));
+	write(1, RES, sizeof(RES));
+	//printf("%s%s"RES, colour, str);
 }
 
 void	reporter(t_philosophers_state state, t_philo *philo)
@@ -46,18 +50,20 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 	else
 	{
 		if ((state == TAKE_LEFT_FORK || state == TAKE_RIGHT_FORK)
-			&& philo->table->end_dinner == false)
+			&& !philo->table->end_dinner)
 			printf("Time: %-10ld %ld has taken a fork ⋔\n", time, philo->id);
-		else if (state == EATING && philo->table->end_dinner == false)
-			printf("Time: %-10ld %ld is eating... 🍝\n", time, philo->id);//TODO
-			//printf("Time: %-10ld %ld is eating... 🍝 %ld\n", time, philo->id,
-			//philo->meals);//TODO
-		else if (state == SLEEPING && philo->table->end_dinner == false)
+		else if (state == EATING && !philo->table->end_dinner)
+			//printf("Time: %-10ld %ld is eating... 🍝\n", time, philo->id);//TODO
+			printf("Time: %-10ld %ld is eating... 🍝 %ld\n", time, philo->id,
+			philo->meals);//TODO
+		else if (state == SLEEPING && !philo->table->end_dinner)
 			printf("Time: %-10ld %ld is sleeping... 💤\n", time, philo->id);
-		else if (state == THINKING && philo->table->end_dinner == false)
+		else if (state == THINKING && !philo->table->end_dinner)
 			printf("Time: %-10ld %ld is thinking... 💭\n", time, philo->id);
-		else if (state == DEAD && philo->table->end_dinner == false)
+		else if (state == DEAD)
 			printf("Time: %-10ld %ld died... 💀\n", time, philo->id);
+		else if (state  == BREAK)
+			printf("Time: %-10ld %ld we where on a break\n", time, philo->id);
 	}
 	mutex_handle(&philo->table->print_mutex, UNLOCK);
 }

@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/27 19:00:04 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:41:19 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,17 @@ bool	philo_dies(t_philo *philo)
 	long	elapsed;
 	long 	time_to_die;
 
-	elapsed = (gettime(philo->table->start_dinner)
-		- get_long(&philo->philo_mutex,	&philo->last_meal));
-	time_to_die = philo->table->time_to_die;
-	if (time_to_die >= elapsed)
+	elapsed = (gettime() - get_long(&philo->philo_mutex,	&philo->last_meal));
+	time_to_die = philo->table->time_to_die / 1000;
+	if (time_to_die <= elapsed)
 	{
-		set_long(&philo->table->finish_mtx, &philo->table->end_dinner, 1);
+		set_bool(&philo->table->finish_mtx, &philo->table->end_dinner, true);
 		return (1);
 	}
 	return(0);
-	/* if (get_bool(&philo->philo_mutex, &philo->full))
-		return (false); */
-	/* long current_time = gettime();
-	long last_meal_time = get_long(&philo->philo_mutex, &philo->last_meal);
-	time = current_time - last_meal_time;
-	time_to_die = philo->table->time_to_die / 1000;
-	if (time > time_to_die)
-	{
-		reporter(DEAD, philo);
-		set_bool(&philo->philo_mutex, &philo->id, true);
-		return (true);
-	}
-	return (false); */
 }
-void	philo_eats(t_philo *philo)
+
+/* void	philo_eats(t_philo *philo)
 {
 	if (philo->table->amount_of_meals >= 0
 		&& philo->meals == philo->table->amount_of_meals)
@@ -68,20 +55,26 @@ void	philo_eats(t_philo *philo)
 		set_bool(&philo->philo_mutex, &philo->full, true);
 		philo->table->philos_full++;
 			//philo->table->philos_full++;//?? TODO sigue
-			//printf("amount of full philos: %ld\n", philo->table->philos_full);
+			printf("amount of full philos: %ld\n", philo->table->philos_full);
 			//philo_thinks(philo, true);
 	}
 	mutex_handle(&philo->left_fork->fork, LOCK);
 	reporter(TAKE_LEFT_FORK, philo);
 	mutex_handle(&philo->right_fork->fork, LOCK);
 	reporter(TAKE_RIGHT_FORK, philo);
+	write(1, "left\n", 5);
 	set_long(&philo->philo_mutex, &philo->last_meal, gettime());
 	philo->meals++;
+
 	reporter(EATING, philo);
-	usleep(philo->table->time_to_eat/1000);
+	usleep(philo->table->time_to_eat);
 	mutex_handle(&philo->left_fork->fork, UNLOCK);
+	// printf("Time: %-10ld %ld has put down left philo.h ⋔\n", gettime()- - philo->table->start_dinner, philo->id);
 	mutex_handle(&philo->right_fork->fork, UNLOCK);
-}
+//	write(1, "right", 5);
+
+	// printf("Time: %-10ld %ld has put down right philo.h ⋔\n", gettime() - philo->table->start_dinner, philo->id);
+} */
 
 bool	dinner_finished(t_table *table)
 {
@@ -98,13 +91,22 @@ void	waiter(t_table *table)
 	while (i < table->number_of_philosophers)
 	{
 		if (philo_dies(&table->philos[i]))
+		{
+			reporter(DEAD, &table->philos[i]);
 			funeral(table);
+		}
 		if (table->amount_of_meals == table->philos_full)
+		{
+			// table->end_dinner = 1;
+			set_bool(&table->table_mutex, &table->end_dinner, true);
 			restaurant_closing(table);
+		}
 		i++;
 		if (table->number_of_philosophers == i)
 			i = 0;
 
+	}
+}
 		/* if (philo_dies(table->philos + i))
 		{
 			set_bool(&table->table_mutex, &table->end_dinner, true);
@@ -118,5 +120,3 @@ void	waiter(t_table *table)
 			restaurant_closing(table);
 		}
 		i++; */
-	}
-}

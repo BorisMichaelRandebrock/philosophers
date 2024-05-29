@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/05/27 19:40:04 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:14:27 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@ int	thread_init(t_table *table)
 
 	i = -1;
 	philo = table->philos;
+	// table->start_dinner = gettime(0);
 	while (++i < table->number_of_philosophers)
 	{
-		if (threading(&philo[i].thread_id, &dinner_rules, &philo[i], CREATE) != 0)
-			return (1);
+//	threading(&philo[i].thread_id, &dinner_rules, &philo[i],CREATE);
+	//print_colours("Here i am", GREEN);
+
+	 	if (threading(&philo[i].thread_id, &dinner_rules, &philo[i],
+		CREATE) != 0)
+ 		return (1);
 	}
 	return (0);
 }
@@ -54,9 +59,10 @@ static void	philo_init(t_table *table)
 	i = -1;
 	while (++i < table->number_of_philosophers)
 	{
+
 		philo = &table->philos[i];
 		philo->id = i + 1;
-		philo->last_meal = 0;
+		philo->last_meal = table->start_dinner;
 		philo->meals = 0;
 		philo->full = false;// ??necessary??
 		mutex_handle(&philo->philo_mutex, INIT);
@@ -104,7 +110,7 @@ static void	create_data_mtx(t_table *table)
 	mutex_handle(&table->print_mutex, INIT);
 	mutex_handle(&table->full_mtx, INIT);
 	mutex_handle(&table->finish_mtx, INIT);
-	mutex_handle(&table->table_mutex, LOCK);
+	// mutex_handle(&table->table_mutex, LOCK);
 }
 
 int	init_table(t_table *table)
@@ -112,8 +118,8 @@ int	init_table(t_table *table)
 	int	i;
 
 	i = - 1;
-	table->end_dinner = 0;
 	table->philos_full = 0;
+	table->end_dinner = 0;
 	create_data_mtx(table);
 	table->forks = malloc(sizeof(t_fork) * table->number_of_philosophers);
 	if (!table->forks)
@@ -126,8 +132,10 @@ int	init_table(t_table *table)
 	table->philos = malloc(sizeof(t_philo) * table->number_of_philosophers);
 	if (!table->philos)
 		print_error("Philo Malloc failed..");
+	table->start_dinner = gettime();
 	philo_init(table);
-	if (thread_init(table) != 0)
-		return (1);
+	thread_init(table);
+	/* if (thread_init(table) == 0)
+		return (1); */
 	return (0);
 }
