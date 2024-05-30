@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:34:04 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/30 10:46:50 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:40:52 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void increase_long(type_mtx *mutex, long *value)
 	mutex_handle(mutex, UNLOCK);
 }
 
-bool all_threads_created(type_mtx *mutex, long *threads,
+/* bool all_threads_created(type_mtx *mutex, long *threads,
 							long number_of_philosophers)
 {
 	mutex_handle(mutex, LOCK);
 	if (*threads == number_of_philosophers)
 		return (true);
 	return (false);
-}
+} */
 // void	precise_usleep(long usec, t_table *table)
 // {
 // 	long	start;

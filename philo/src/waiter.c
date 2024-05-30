@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/30 12:53:37 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:03:38 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ bool	philo_dies(t_philo *philo)
 	if (time_to_die <= elapsed)
 	{
 		reporter(DEAD, philo);
+	//	philo->death = true;
 		set_bool(&philo->table->finish_mtx, &philo->table->end_dinner, true);
 		return (1);
 	}
@@ -94,22 +95,24 @@ void	waiter(t_table *table)
 	{
 		if (table->number_of_philosophers == table->philos_full -1)
 		{
-			// table->end_dinner = 1;
 			set_bool(&table->table_mutex, &table->end_dinner, true);
 			restaurant_closing(table);
 		}
 		else if (philo_dies(&table->philos[i]))
 		{
-			//printf(RED"philo most definitely died of natural causes.. %ld died\n", table->philos[i].id);
-			// reporter(DEAD, &table->philos[i]);
+			i = -1;
+			/* while (++i < table->number_of_philosophers)
+				mutex_handle(&table->forks[i].fork, UNLOCK); */
+			//reporter(DEAD, &table->philos[i]);
 			funeral(table);
 		}
 		i++;
 		if (table->number_of_philosophers == i)
 			i = 0;
-
 	}
 }
+			// table->end_dinner = 1;
+			//printf(RED"philo most definitely died of natural causes.. %ld died\n", table->philos[i].id);
 		/* if (philo_dies(table->philos + i))
 		{
 			set_bool(&table->table_mutex, &table->end_dinner, true);

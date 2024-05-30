@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:12:25 by boris             #+#    #+#             */
-/*   Updated: 2024/05/28 16:57:19 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:47:57 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	mutex_handle(type_mtx *mutex, t_opcode opcode)
 	else if (opcode == DESTROY)
 	{
 		if (pthread_mutex_destroy(mutex) != 0)
+		{
+			// printf("%ld", );˚ç
 			return (mutex_error_check(DESTROY));
+		}
 	}
 	return (0);
 }
