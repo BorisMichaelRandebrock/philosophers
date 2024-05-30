@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 17:19:49 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int	main(int argc, char **argv)
 	init_table(&table);
 	/* if (init_table(&table) != 0)
 		restaurant_closing(&table);
- */	//table.start_dinner = gettime(0);
+ */	//table.start_dinner = gettime();
 	waiter(&table);
 }

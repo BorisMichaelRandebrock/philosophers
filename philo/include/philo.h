@@ -144,7 +144,8 @@ void set_bool(type_mtx *mutex, bool *dest, bool value);
 bool get_bool(type_mtx *mutex, bool *value);
 void set_long(type_mtx *mutex, long *dest, long value);
 long get_long(type_mtx *mutex, long *value);
-long gettime();
+long gettime(void);
+//long gettime();
 // int		gettimes(int time_type);
 
 // ->sync_utils.c
@@ -152,7 +153,7 @@ void even_odd(t_philo *philo);
 //void wait_threads(t_table *table);
 void increase_long(type_mtx *mutex, long *value);
 bool all_threads_created(type_mtx *mutex, long *threads,
-												 long number_of_philosophers);
+	long number_of_philosophers);
 void precise_usleep(long usec);
 //void precise_usleep(long usec, t_table *table);
 
@@ -162,6 +163,8 @@ bool philo_dies(t_philo *philo);
 void philo_eats(t_philo *philo);
 bool dinner_finished(t_table *table);
 void waiter(t_table *table);
+
+
 
 // ->dinner_ending.c
 void restaurant_closing(t_table *table);

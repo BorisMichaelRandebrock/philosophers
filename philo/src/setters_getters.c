@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:59:59 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/27 19:26:34 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ long	get_long(type_mtx *mutex, long *value)
 	return (return_value);
 }
 
-long	gettime()
+//long	gettime()
+long	gettime(void)
 {
 	struct	timeval	time_val;
 	long	current_time;

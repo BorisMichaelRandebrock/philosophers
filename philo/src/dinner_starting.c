@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 17:36:36 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	dinner_party(t_philo *philo)
 	philo->meals++;
 	//set_long(&philo->philo_mutex, &philo->last_meal, (philo->last_meal + 1));
 	set_long(&philo->philo_mutex, &philo->last_meal,
-		gettime(&philo->table->start_dinner));
+		/*gettime(&philo->table->start_dinner)*/gettime());
 	usleep(philo->table->time_to_eat);
 
 	//precise_usleep(philo->table->time_to_eat);

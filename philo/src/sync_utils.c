@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:34:04 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/27 18:31:10 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ bool all_threads_created(type_mtx *mutex, long *threads,
 // }
 void	precise_usleep(long time)
 {
-	time = gettime(0);
-	while (gettime(0) <= time)
+/* 	time = gettime(0);
+	while (gettime(0) <= time) */
+	time = gettime();
+	while (gettime() <= time)
 		usleep(100);
 }

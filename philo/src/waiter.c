@@ -6,11 +6,12 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:15:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 17:28:37 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:53:37 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include "colours.h"
 
 void	philo_thinks(t_philo *philo, bool initial)
 {
@@ -41,6 +42,7 @@ bool	philo_dies(t_philo *philo)
 	time_to_die = philo->table->time_to_die / 1000;
 	if (time_to_die <= elapsed)
 	{
+		reporter(DEAD, philo);
 		set_bool(&philo->table->finish_mtx, &philo->table->end_dinner, true);
 		return (1);
 	}
@@ -98,7 +100,8 @@ void	waiter(t_table *table)
 		}
 		else if (philo_dies(&table->philos[i]))
 		{
-			reporter(DEAD, &table->philos[i]);
+			//printf(RED"philo most definitely died of natural causes.. %ld died\n", table->philos[i].id);
+			// reporter(DEAD, &table->philos[i]);
 			funeral(table);
 		}
 		i++;
