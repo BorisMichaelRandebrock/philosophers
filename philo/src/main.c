@@ -6,32 +6,33 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/23 15:25:04 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:50 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 #include "colours.h"
 
 void clear_terminal()
 {
-    printf("\033[2J\033[H");
+	write(1,"\033[2J\033[H", 8);
+   // printf("\033[2J\033[H");
   //  fflush(stdout);
 }
 
 static void conversation(void)
 {
-		//usleep(6000000);//TODO undo the comments
-		//clear_terminal();
+		/* usleep(6000000);//TODO undo the comments
+		clear_terminal(); */
 		print_colours("\nSince everybody is seated...\n", WHITE);
-		//usleep(500000);
+		// usleep(800000);
 		print_colours("	& orders are taken:\n\n", WHITE);
-		//usleep(500000);
-		print_colours("Enjoy your meal! ", DARK_RED);
+		// usleep(800000);
+		print_colours("Let's start the Dinner ", GREEN);
 		printf("🍝\n");
-	//	usleep(600000);
+		// usleep(1000000);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	if (argc >= 5 && argc <= 6)
@@ -43,9 +44,31 @@ int	main(int argc, char **argv)
 		dinner_prep(&table);
 		conversation();
 		dinner_start(&table);
-	//	restaurant_closing(&table);
+		if (dinner_start(&table) !=0)
+		{
+			restaurant_closing(&table);
+			return (1);
+		 }
+		//mutex_handle(&table.table_mutex, UNLOCK);
+		//table.start_dinner = gettime(0);
+
 	}
 	else
 		print_error("Error: Wrong number of arguments 🤬");
 	return (0);
+} */
+
+int	main(int argc, char **argv)
+{
+	t_table	table;
+	clear_terminal();
+	if (argc < 5 || argc > 6)
+		print_error("Error: Wrong number of arguments");
+	error_parsing(&table, argv);
+	conversation();
+	init_table(&table);
+	/* if (init_table(&table) != 0)
+		restaurant_closing(&table);
+ */	//table.start_dinner = gettime();
+	waiter(&table);
 }

@@ -6,11 +6,11 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:58:30 by boris             #+#    #+#             */
-/*   Updated: 2024/05/23 13:26:39 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:37:55 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 #include "colours.h"
 
 static long ft_atol(const char *str)
@@ -52,8 +52,8 @@ void	error_parsing(t_table *table, char **argv)
     table->time_to_die = ft_atol(argv[2]) * 1000;
     table->time_to_eat = ft_atol(argv[3]) * 1000;
     table->time_to_sleep = ft_atol(argv[4]) * 1000;
-    if (table->time_to_die < 6e4 || table->time_to_eat < 6e4
-            || table->time_to_sleep < 6e4)
+    if (table->time_to_die < 60000|| table->time_to_eat < 60000
+            || table->time_to_sleep < 60000)
         print_error("Error: Wrong time 🤬\n");
     if (argv[5])
 		meal_amounts(table, argv[5]);
@@ -66,5 +66,5 @@ void	error_parsing(t_table *table, char **argv)
     print_colours("Maximus", BLUE);
     print_colours(", your Maître, he will take care of "
 	 				"your every needs.. \n\n", WHITE);
-    print_colours("We hope you will enjoy your stay!\n", DARK_RED);
+    print_colours("Enjoy your stay!\n", MAGENTA);
 }

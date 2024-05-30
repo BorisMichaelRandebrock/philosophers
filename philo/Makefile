@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/05/10 10:39:57 by brandebr         ###   ########.fr        #
+#    Updated: 2024/05/30 12:08:05 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ all: Makefile $(NAME)
 
 tleaks: all
 	@$(TEST_LEAKS) ./$(NAME) 1 800 200 200 5
-# @$(TEST_LEAKS)./$(NAME) $(TEST_ARGS)
 
 valgrind: all
 	@$(VALGRIND) ./$(NAME) 5 800 200 200 5
