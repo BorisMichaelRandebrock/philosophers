@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:00:29 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/29 16:02:48 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/30 19:09:41 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 			printf("Time: %-10ld %ld is thinking... 💭\n", time, philo->id);
 		else if (state == DEAD)
 			printf("Time: %-10ld %ld died... 💀\n", time, philo->id);
-		else if (state  == BREAK)
-			printf("Time: %-10ld %ld we where on a break\n", time, philo->id);
 	}
 	mutex_handle(&philo->table->print_mutex, UNLOCK);
 }

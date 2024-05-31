@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/05/28 20:14:27 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:26:46 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	thread_init(t_table *table)
 //	threading(&philo[i].thread_id, &dinner_rules, &philo[i],CREATE);
 	//print_colours("Here i am", GREEN);
 
-	 	if (threading(&philo[i].thread_id, &dinner_rules, &philo[i],
-		CREATE) != 0)
+	if (threading(&philo[i].thread_id, &dinner_rules, &philo[i], CREATE) != 0)
  		return (1);
 	}
 	return (0);
@@ -64,7 +63,7 @@ static void	philo_init(t_table *table)
 		philo->id = i + 1;
 		philo->last_meal = table->start_dinner;
 		philo->meals = 0;
-		philo->full = false;// ??necessary??
+		philo->full = false;
 		mutex_handle(&philo->philo_mutex, INIT);
 		philo->table = table;
 		assign_forks(philo, table->forks, i);
@@ -110,6 +109,7 @@ static void	create_data_mtx(t_table *table)
 	mutex_handle(&table->print_mutex, INIT);
 	mutex_handle(&table->full_mtx, INIT);
 	mutex_handle(&table->finish_mtx, INIT);
+	mutex_handle(&table->dead_filo_mutex, INIT);
 	// mutex_handle(&table->table_mutex, LOCK);
 }
 
@@ -120,6 +120,7 @@ int	init_table(t_table *table)
 	i = - 1;
 	table->philos_full = 0;
 	table->end_dinner = 0;
+	table->dead = false;
 	create_data_mtx(table);
 	table->forks = malloc(sizeof(t_fork) * table->number_of_philosophers);
 	if (!table->forks)
@@ -134,8 +135,8 @@ int	init_table(t_table *table)
 		print_error("Philo Malloc failed..");
 	table->start_dinner = gettime();
 	philo_init(table);
-	thread_init(table);
-	/* if (thread_init(table) == 0)
-		return (1); */
+	//thread_init(table);
+	if (thread_init(table) == 0)
+		return (1);
 	return (0);
 }
