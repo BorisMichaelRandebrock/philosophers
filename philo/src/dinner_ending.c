@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:42:32 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/31 17:15:43 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:26:30 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	destroy_mutex(t_table *table)
 	mutex_handle(&table->finish_mtx, UNLOCK);
 
 
-	//mutex_handle(&table->m_end_dinner, DESTROY);
+	mutex_handle(&table->dead_filo_mutex, DESTROY);
 	mutex_handle(&table->table_mutex, DESTROY);
 	//mutex_handle(&table->print_mutex, DESTROY);
 	mutex_handle(&table->full_mtx, DESTROY);

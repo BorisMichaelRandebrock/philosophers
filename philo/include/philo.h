@@ -73,7 +73,7 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	bool		full;
-//	bool		death;
+//	bool		dead;
 	long		id;
 	long		meals;
 	long		last_meal;
@@ -86,12 +86,13 @@ typedef struct s_philo
 
 typedef struct s_table
 {
+	bool	dead;
 	long number_of_philosophers;
 	long time_to_die;
 	long time_to_eat;
 	long time_to_sleep;
 	long amount_of_meals;
-	//type_mtx	m_end_dinner;
+	type_mtx	dead_filo_mutex;
 	bool 		end_dinner;
 	long philos_full;
 	long start_dinner;
@@ -156,7 +157,7 @@ void even_odd(t_philo *philo);
 void increase_long(type_mtx *mutex, long *value);
 /* bool all_threads_created(type_mtx *mutex, long *threads,
 	long number_of_philosophers); */
-void precise_usleep(long usec);
+//void precise_usleep(long usec);
 //void precise_usleep(long usec, t_table *table);
 
 // ->waiter.c
