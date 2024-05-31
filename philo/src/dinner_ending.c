@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:42:32 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/30 19:07:40 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:15:43 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	destroy_mutex(t_table *table)
 	mutex_handle(&table->finish_mtx, UNLOCK);
 
 
-	mutex_handle(&table->m_end_dinner, DESTROY);
+	//mutex_handle(&table->m_end_dinner, DESTROY);
 	mutex_handle(&table->table_mutex, DESTROY);
-	mutex_handle(&table->print_mutex, DESTROY);
+	//mutex_handle(&table->print_mutex, DESTROY);
 	mutex_handle(&table->full_mtx, DESTROY);
 	mutex_handle(&table->finish_mtx, DESTROY);
 }
@@ -74,7 +74,6 @@ void	funeral(t_table *table)
 	{
 		philo = &table->philos[i];
 		//mutex_handle(&table->philos->philo_mutex, UNLOCK);
-		printf(RED"fork numbero"RES" %i", i);
 		mutex_handle(&table->forks[i].fork, UNLOCK);
 		mutex_handle(&table->forks[i].fork, DESTROY);
 		mutex_handle(&philo->philo_mutex, DESTROY);

@@ -91,7 +91,7 @@ typedef struct s_table
 	long time_to_eat;
 	long time_to_sleep;
 	long amount_of_meals;
-	type_mtx	m_end_dinner;
+	//type_mtx	m_end_dinner;
 	bool 		end_dinner;
 	long philos_full;
 	long start_dinner;

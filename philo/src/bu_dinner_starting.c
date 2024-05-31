@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/30 17:43:06 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:15:43 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ static void	dinner_party(t_philo *philo)
 bool	end(t_table *table)
 {
 	bool	temp;
-	mutex_handle(&table->m_end_dinner, LOCK);
+	mutex_handle(&table->finish_mtx, LOCK);
 	temp = table->end_dinner;
-	mutex_handle(&table->m_end_dinner, UNLOCK);
+	mutex_handle(&table->finish_mtx, UNLOCK);
 	return (temp);
 }
 

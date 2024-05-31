@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:38:37 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/30 18:43:18 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:15:21 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ static void left_fork(t_philo *philo)
 
 static void	right_fork(t_philo	*philo)
 {
+	mutex_handle(&philo->right_fork->fork, LOCK);
 	if (philo->table->end_dinner == true)
 	{
-		mutex_handle(&philo->left_fork->fork, UNLOCK);
 		mutex_handle(&philo->right_fork->fork, UNLOCK);
+		mutex_handle(&philo->left_fork->fork, UNLOCK);
 		return ;
 	}
 	reporter(TAKE_RIGHT_FORK, philo);
@@ -103,21 +104,20 @@ static void	dinner_party(t_philo *philo)
 {
 	if (philo->meals == philo->table->amount_of_meals)
 	{
-		set_bool(&philo->philo_mutex, &philo->full, true);
 		mutex_handle(&philo->table->table_mutex, LOCK);
-		philo->table->philos_full++;
+		set_bool(&philo->philo_mutex, &philo->full, true);
+	//	philo->table->philos_full++;
 		set_long(&philo->table->full_mtx, &philo->table->philos_full,
 			philo->table->philos_full + 1);
 		mutex_handle(&philo->table->table_mutex, UNLOCK);
 		return ;
 	}
 	left_fork(philo);
-	mutex_handle(&philo->right_fork->fork, LOCK);
 	right_fork(philo);
-	set_long(&philo->philo_mutex, &philo->last_meal, gettime());
 	usleep(philo->table->time_to_eat);
-	mutex_handle(&philo->left_fork->fork, UNLOCK);
+	set_long(&philo->philo_mutex, &philo->last_meal, gettime());
 	mutex_handle(&philo->right_fork->fork, UNLOCK);
+	mutex_handle(&philo->left_fork->fork, UNLOCK);
 	if (philo->table->end_dinner == true)
 			return ;
 	reporter(SLEEPING, philo);
@@ -128,20 +128,21 @@ static void	dinner_party(t_philo *philo)
 bool	end(t_table *table)
 {
 	bool	temp;
-	mutex_handle(&table->m_end_dinner, LOCK);
+	mutex_handle(&table->finish_mtx, LOCK);
 	temp = table->end_dinner;
-	mutex_handle(&table->m_end_dinner, UNLOCK);
+	mutex_handle(&table->finish_mtx, UNLOCK);
 	return (temp);
 }
 
-void	*dinner_rules(void *table)
+void	*dinner_rules(void *filo)
 {
 	t_philo	*philo;
-	philo = (t_philo *)table;
+	philo = (t_philo *)filo;
 	if (philo->id % 2 == 0)
 		usleep(philo->table->time_to_eat / 1000);
 		//precise_usleep(philo->table->time_to_eat / 1000);
-	while (!philo->table->end_dinner)
+	// while (!philo->table->end_dinner)
+	while (!get_bool(&philo->table->full_mtx, &philo->table->end_dinner))
 	{
 		if (philo->table->number_of_philosophers == 1)
 		{

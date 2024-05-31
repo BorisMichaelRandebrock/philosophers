@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 16:59:08 by boris             #+#    #+#             */
-/*   Updated: 2024/05/30 16:59:33 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:15:41 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	create_data_mtx(t_table *table)
 	mutex_handle(&table->print_mutex, INIT);
 	mutex_handle(&table->full_mtx, INIT);
 	mutex_handle(&table->finish_mtx, INIT);
-	mutex_handle(&table->m_end_dinner, INIT);
+	//mutex_handle(&table->m_end_dinner, INIT);
 	// mutex_handle(&table->table_mutex, LOCK);
 }
 
