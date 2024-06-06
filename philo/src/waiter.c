@@ -75,18 +75,14 @@ void	waiter(t_table *table)
 {
 	while (!get_bool(&table->finish_mtx, &table->end_dinner))
 	{
-
-		if (table->number_of_philosophers == table->philos_full)
+		//if (table->number_of_philosophers == table->philos_full)
+		if (get_long(&table->full_mtx, &table->philos_full) == table->number_of_philosophers -1)
 		{
 			set_bool(&table->finish_mtx, &table->end_dinner, true);
 			restaurant_closing(table);
 		}
 		else if (get_bool(&table->dead_filo_mutex, &table->dead))
 		{
-			//i = -1;
-			//  while (++i < table->number_of_philosophers)
-			// 	mutex_handle(&table->forks[i].fork, UNLOCK);
-			//reporter(DEAD, &table->philos[i]);
 			set_bool(&table->finish_mtx, &table->end_dinner, true);
 			funeral(table);
 		}

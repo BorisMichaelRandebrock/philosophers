@@ -26,8 +26,10 @@ int	thread_init(t_table *table)
 //	threading(&philo[i].thread_id, &dinner_rules, &philo[i],CREATE);
 	//print_colours("Here i am", GREEN);
 
-	if (threading(&philo[i].thread_id, &dinner_rules, &philo[i], CREATE) != 0)
- 		return (1);
+		if (threading(&philo[i].thread_id, &dinner_rules, &philo[i], CREATE) != 0)
+			return (1);
+		// if (i % 2 == 1)
+		// 	usleep(100);
 	}
 	return (0);
 }

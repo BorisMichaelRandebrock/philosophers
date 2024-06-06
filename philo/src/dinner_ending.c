@@ -16,13 +16,13 @@
 static void	destroy_mutex(t_table *table)
 {
 	//mutex_handle(&table->print_mutex, UNLOCK);//am i the one???
-	mutex_handle(&table->full_mtx, UNLOCK);
-	mutex_handle(&table->finish_mtx, UNLOCK);
+//	mutex_handle(&table->full_mtx, UNLOCK);
+//	mutex_handle(&table->finish_mtx, UNLOCK);
 
 
-	mutex_handle(&table->dead_filo_mutex, DESTROY);
+	//mutex_handle(&table->dead_filo_mutex, DESTROY);
 	mutex_handle(&table->table_mutex, DESTROY);
-	//mutex_handle(&table->print_mutex, DESTROY);
+	mutex_handle(&table->print_mutex, DESTROY);
 	mutex_handle(&table->full_mtx, DESTROY);
 	mutex_handle(&table->finish_mtx, DESTROY);
 }
@@ -74,10 +74,11 @@ void	funeral(t_table *table)
 	{
 		philo = &table->philos[i];
 		//mutex_handle(&table->philos->philo_mutex, UNLOCK);
-		mutex_handle(&table->forks[i].fork, UNLOCK);
+//		mutex_handle(&table->forks[i].fork, UNLOCK);
 		mutex_handle(&table->forks[i].fork, DESTROY);
 		mutex_handle(&philo->philo_mutex, DESTROY);
 	}
+//	mutex_handle(&table->finish_mtx, UNLOCK);
 	destroy_mutex(table);
 	if (table->forks)
 		free(table->forks);

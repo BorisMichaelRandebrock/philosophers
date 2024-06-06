@@ -21,15 +21,15 @@ SRC = main.c print_utils.c error_parsing.c dinner_prep.c mutex_handle.c dinner_e
 
 OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
 
-CC = gcc -g
-TEST_LEAKS		:= leaks -atExit --
+CC = gcc -lpthread -g -fsanitize=thread
+TEST_LEAKS	:= leaks -atExit --
 TEST_ARGS ?= argv
 
 VALGRIND = valgrind -s
 VIKING =  valgrind  --leak-check=full
 RAGNAROK = valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes 
 
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
+FLAGS = -Wall -Wextra -Werror #-lpthread  -fsanitize=thread
 GREEN		:=\033[0;32m
 RED		:=\033[0;31m
 BLUE		:=\033[0;34m
@@ -51,6 +51,7 @@ ragnarok: all
 
 %.o: %.c
 	@$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS)
+# @$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS)
 # @$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS) $< -o $(OBJ_DIR)$@
 
 $(NAME): $(OBJ)

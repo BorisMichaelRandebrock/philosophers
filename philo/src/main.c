@@ -22,16 +22,31 @@ void clear_terminal()
 
 static void conversation(void)
 {
-		/* usleep(6000000);//TODO undo the comments
-		clear_terminal(); */
+		//usleep(6000000);//TODO undo the comments
+		//clear_terminal(); 
 		print_colours("\nSince everybody is seated...\n", WHITE);
-		// usleep(800000);
+		//usleep(800000);
 		print_colours("	& orders are taken:\n\n", WHITE);
-		// usleep(800000);
+		//usleep(800000);
 		print_colours("Let's start the Dinner ", GREEN);
 		printf("🍝\n");
-		// usleep(1000000);
+		//usleep(1000000);
 }
+/*
+static void conversation(void)
+{
+		usleep(6000000);//TODO undo the comments
+		clear_terminal(); 
+		print_colours("\nSince everybody is seated...\n", WHITE);
+		usleep(800000);
+		print_colours("	& orders are taken:\n\n", WHITE);
+		usleep(800000);
+		print_colours("Let's start the Dinner ", GREEN);
+		printf("🍝\n");
+		usleep(1000000);
+}
+*/
+
 /*
 int	main(int argc, char **argv)
 {

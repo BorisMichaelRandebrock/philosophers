@@ -39,6 +39,42 @@ void	print_colours(const char *str, const char *colour)
 	//printf("%s%s"RES, colour, str);
 }
 
+static bool getit(t_philo *philo)
+{
+	get_bool(&philo->table->finish_mtx ,&philo->table->end_dinner);
+	return (0);
+}
+void	reporter(t_philosophers_state state, t_philo *philo)
+{
+	long	time;
+
+	time = gettime() - philo->table->start_dinner;
+	mutex_handle(&philo->table->print_mutex, LOCK);
+	if (get_bool(&philo->philo_mutex, &philo->full))
+		return ;
+	else
+	{
+		if ((state == TAKE_LEFT_FORK ) && !getit(philo))
+			//&& !get_bool(&philo->table->finish_mtx ,&philo->table->end_dinner))
+			printf("Time: %-10ld %ld has taken the left fork ⋔\n", time, philo->id);
+		else if ((state == TAKE_RIGHT_FORK) && !getit(philo))
+			//&& !get_bool(&philo->table->finish_mtx ,&philo->table->end_dinner))
+			printf("Time: %-10ld %ld has taken the right fork ⋔\n", time, philo->id);
+		else if (state == EATING && !getit(philo))
+			//printf("Time: %-10ld %ld is eating... 🍝\n", time, philo->id);//TODO
+			printf("Time: %-10ld %ld is eating... 🍝 %ld\n", time, philo->id,
+			(philo->meals +1));//TODO
+		else if (state == SLEEPING && !getit(philo))
+			printf("Time: %-10ld %ld is sleeping... 💤\n", time, philo->id);
+		else if (state == THINKING && !getit(philo))
+			printf("Time: %-10ld %ld is thinking... 💭\n", time, philo->id);
+		else if (state == DEAD)
+			printf("Time: %-10ld %ld died... 💀\n", time, philo->id);
+	}
+	mutex_handle(&philo->table->print_mutex, UNLOCK);
+}
+
+/* //reporter backup
 void	reporter(t_philosophers_state state, t_philo *philo)
 {
 	long	time;
@@ -66,3 +102,5 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 	mutex_handle(&philo->table->print_mutex, UNLOCK);
 }
 
+
+*/

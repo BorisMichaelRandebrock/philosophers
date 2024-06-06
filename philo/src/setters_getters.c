@@ -33,9 +33,11 @@ bool	get_bool(type_mtx *mutex,  bool *value)
 
 void	set_long(type_mtx *mutex, long *dest, long value)
 {
-	mutex_handle(mutex, LOCK);
+	if (mutex)
+		mutex_handle(mutex, LOCK);
 	*dest = value;
-	mutex_handle(mutex, UNLOCK);
+	if (mutex)
+		mutex_handle(mutex, UNLOCK);
 }
 
 long	get_long(type_mtx *mutex, long *value)
