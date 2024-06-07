@@ -16,7 +16,6 @@
 void clear_terminal()
 {
 	write(1,"\033[2J\033[H", 8);
-   // printf("\033[2J\033[H");
   //  fflush(stdout);
 }
 

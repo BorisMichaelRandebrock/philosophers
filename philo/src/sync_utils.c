@@ -13,19 +13,19 @@
 #include "philo.h"
 
 
-void	even_odd(t_philo *philo)
-{
-	if (philo->table->number_of_philosophers % 2 == 0)
-	{
-		if (philo->id % 2 == 0)
-			usleep(200);
-	}
-	else
-	{
-		if (philo->id % 2)
-			philo_thinks(philo, true);
-	}
-}
+// void	even_odd(t_philo *philo)
+// {
+// 	if (philo->table->number_of_philosophers % 2 == 0)
+// 	{
+// 		if (philo->id % 2 == 0)
+// 			usleep(200);
+// 	}
+// 	else
+// 	{
+// 		if (philo->id % 2)
+// 			philo_thinks(philo, true);
+// 	}
+// }
 /* void	wait_threads(t_table *table)
 {
 	while (!get_bool(&table->table_mutex, &table->threads_created))

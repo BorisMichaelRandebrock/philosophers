@@ -50,7 +50,6 @@ long	get_long(type_mtx *mutex, long *value)
 	return (return_value);
 }
 
-//long	gettime()
 long	gettime(void)
 {
 	struct	timeval	time_val;
@@ -64,24 +63,3 @@ long	gettime(void)
 	current_time = (time_val.tv_sec * 1000) + (time_val.tv_usec / 1000);
 	return (current_time);
 }
-/*
-
-int	gettime(int time_type)
-{
-	struct timeval	time;
-
-	if (gettimeofday(&time, NULL))
-		print_error("Error: gettimeofday failed... ⏱");
-
-	if (time_type == MILLISECONDS)
-		return (time.tv_sec * 1e3 + time.tv_usec / 1e3);
-	else if (time_type == MICROSECONDS)
-		return (time.tv_sec * 1e6 + time.tv_usec);
-	else if (time_type == SECONDS)
-		return (time.tv_sec + time.tv_usec / 1e6);
-	else
-		print_error("Error: Wrong time type... ⏱\n"
-			"Please use MILLISECONDS, MICROSECONDS or SECONDS");
-	return (1337);
-}
-*/

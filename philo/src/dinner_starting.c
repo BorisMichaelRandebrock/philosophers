@@ -20,14 +20,11 @@ static void lonely_dinner(t_philo *philo)
 	reporter(TAKE_LEFT_FORK, philo);
 	usleep(philo->table->time_to_die);
 	philo_dies(philo);
-	// mutex_handle(&philo->table->table_mutex,UNLOCK);
-	// funeral(NULL);
 }
 
 static void left_fork(t_philo *philo)
 {
 	mutex_handle(&philo->left_fork->fork, LOCK);
-//	if (philo->table->end_dinner == true)
 	if (get_bool(&philo->table->finish_mtx, &philo->table->end_dinner))
 	{
 		mutex_handle(&philo->left_fork->fork, UNLOCK);
@@ -39,7 +36,6 @@ static void left_fork(t_philo *philo)
 static void	right_fork(t_philo	*philo)
 {
 	mutex_handle(&philo->right_fork->fork, LOCK);
-	//if (philo->table->end_dinner == true)
 	if (get_bool(&philo->table->finish_mtx, &philo->table->end_dinner))
 	{
 		mutex_handle(&philo->right_fork->fork, UNLOCK);
@@ -49,14 +45,10 @@ static void	right_fork(t_philo	*philo)
 	reporter(TAKE_RIGHT_FORK, philo);
 	reporter(EATING, philo);
 	set_long(&philo->philo_mutex, &philo->meals, philo->meals + 1);
-	// philo->meals++;
 }
 
 static void	dinner_party(t_philo *philo)
 {
-	// if (philo->id % 2 == 0)
-	// 		 	usleep(philo->table->time_to_eat / 100);
-	//if (philo->meals == philo->table->amount_of_meals)
 	if (get_long(&philo->philo_mutex, &philo->meals) == philo->table->amount_of_meals)
 	{
 		mutex_handle(&philo->table->full_mtx, LOCK);
@@ -82,14 +74,14 @@ static void	dinner_party(t_philo *philo)
 	usleep(100);
 }
 
-bool	end(t_table *table)
-{
-	bool	temp;
-	mutex_handle(&table->finish_mtx, LOCK);
-	temp = table->end_dinner;
-	mutex_handle(&table->finish_mtx, UNLOCK);
-	return (temp);
-}
+// bool	end(t_table *table)
+// {
+// 	bool	temp;
+// 	mutex_handle(&table->finish_mtx, LOCK);
+// 	temp = table->end_dinner;
+// 	mutex_handle(&table->finish_mtx, UNLOCK);
+// 	return (temp);
+// }
 
 void	*dinner_rules(void *filo)
 {

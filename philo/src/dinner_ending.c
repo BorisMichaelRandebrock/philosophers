@@ -15,12 +15,6 @@
 
 static void	destroy_mutex(t_table *table)
 {
-	//mutex_handle(&table->print_mutex, UNLOCK);//am i the one???
-//	mutex_handle(&table->full_mtx, UNLOCK);
-//	mutex_handle(&table->finish_mtx, UNLOCK);
-
-
-	//mutex_handle(&table->dead_filo_mutex, DESTROY);
 	mutex_handle(&table->table_mutex, DESTROY);
 	mutex_handle(&table->print_mutex, DESTROY);
 	mutex_handle(&table->full_mtx, DESTROY);
@@ -52,6 +46,7 @@ void	restaurant_closing(t_table *table)
 		free(table->philos);
 	exit(0);
 }
+
 static void	final_speech()
 {
 	print_colours("We are deeply saddened by the loss of our valued guest.\n"
@@ -72,12 +67,9 @@ void	funeral(t_table *table)
 	while (++i < table->number_of_philosophers)
 	{
 		philo = &table->philos[i];
-		//mutex_handle(&table->philos->philo_mutex, UNLOCK);
-//		mutex_handle(&table->forks[i].fork, UNLOCK);
 		mutex_handle(&table->forks[i].fork, DESTROY);
 		mutex_handle(&philo->philo_mutex, DESTROY);
 	}
-//	mutex_handle(&table->finish_mtx, UNLOCK);
 	destroy_mutex(table);
 	if (table->forks)
 		free(table->forks);

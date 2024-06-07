@@ -21,14 +21,12 @@ void	philo_thinks(t_philo *philo, bool initial)
 
 	if (initial)
 		reporter(THINKING, philo);
-	/* if (philo->table->number_of_philosophers % 2 == 0)
-		return ; */
 	eat = philo->table->time_to_eat;
 	sleeps = philo->table->time_to_sleep;
 	think = (eat * 2) - sleeps;
 	if (think < 0)
 		think = 0;
-	usleep(think/* * 42*/);
+	usleep(think);
 }
 
 bool	philo_dies(t_philo *philo)
@@ -51,7 +49,6 @@ void	waiter(t_table *table)
 {
 	while (!get_bool(&table->finish_mtx, &table->end_dinner))
 	{
-		//if (table->number_of_philosophers == table->philos_full)
 		if (get_bool(&table->dead_filo_mutex, &table->dead))
 		{
 			set_bool(&table->finish_mtx, &table->end_dinner, true);
