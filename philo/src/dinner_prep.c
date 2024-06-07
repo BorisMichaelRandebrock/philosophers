@@ -42,7 +42,7 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 	if (philo->id == 1)
 	{
 		philo->right_fork = &forks[philo_position];
-		philo->left_fork = &forks[philo_nbr - 1];
+		philo->left_fork = &forks[philo_nbr];
 	}
 	else
 	{
@@ -137,7 +137,6 @@ int	init_table(t_table *table)
 		print_error("Philo Malloc failed..");
 	table->start_dinner = gettime();
 	philo_init(table);
-	//thread_init(table);
 	if (thread_init(table) == 0)
 		return (1);
 	return (0);

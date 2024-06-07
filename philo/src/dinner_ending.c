@@ -66,7 +66,6 @@ void	funeral(t_table *table)
 	int		i;
 
 	i = 0;
-	final_speech();
 	while (i < table->number_of_philosophers)
 		threading(&table->philos[i++].thread_id, NULL, NULL, JOIN);
 	i = -1;
@@ -84,5 +83,6 @@ void	funeral(t_table *table)
 		free(table->forks);
 	if (table->philos)
 		free(table->philos);
+	final_speech();
 	exit(0);
 }

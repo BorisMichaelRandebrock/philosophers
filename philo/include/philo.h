@@ -73,7 +73,6 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	bool		full;
-//	bool		dead;
 	long		id;
 	long		meals;
 	long		last_meal;
@@ -163,8 +162,8 @@ void increase_long(type_mtx *mutex, long *value);
 // ->waiter.c
 void philo_thinks(t_philo *philo, bool initial);
 bool philo_dies(t_philo *philo);
-void philo_eats(t_philo *philo);
-bool dinner_finished(t_table *table);
+// void philo_eats(t_philo *philo);
+// bool dinner_finished(t_table *table);
 void waiter(t_table *table);
 
 

@@ -36,7 +36,6 @@ void	print_colours(const char *str, const char *colour)
 	write(1, colour, ft_strlen(colour));
 	write(1, str, ft_strlen(str));
 	write(1, RES, sizeof(RES));
-	//printf("%s%s"RES, colour, str);
 }
 
 static bool getit(t_philo *philo)
@@ -44,6 +43,7 @@ static bool getit(t_philo *philo)
 	get_bool(&philo->table->finish_mtx ,&philo->table->end_dinner);
 	return (0);
 }
+
 void	reporter(t_philosophers_state state, t_philo *philo)
 {
 	long	time;
