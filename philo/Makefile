@@ -28,7 +28,7 @@ VALGRIND = valgrind -s
 VIKING =  valgrind  --leak-check=full
 RAGNAROK = valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes 
 
-FLAGS = -Wall -Wextra -Werror #-lpthread  -fsanitize=thread -no-pie
+FLAGS = -Wall -Wextra -Werror
 
 all: Makefile $(NAME)
 
@@ -38,18 +38,18 @@ tleaks: all
 valgrind: all
 	@$(VALGRIND) ./$(NAME) 5 1800 200 200 5
 
-viking: all
+viking: all 
 	@$(VIKING) ./$(NAME) 5 800 200 200 5
 
 ragnarok: all
 	@$(RAGNAROK) ./$(NAME) 5 800 200 200 5
 
-%.o: %.c
-	@$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS)
+%.o: %.c Makefile
+	$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS) 
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
-
+ 
 clean:
 	/bin/rm -f $(OBJ)
 

@@ -25,7 +25,7 @@ int	mutex_error_check(int status)
 	if (status == DESTROY)
 		printf("Problem destroying the mutex.\n");
 	return (1);
-}
+} 
 
 int	mutex_handle(type_mtx *mutex, t_opcode opcode)
 {
