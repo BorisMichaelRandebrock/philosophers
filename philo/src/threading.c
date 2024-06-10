@@ -12,12 +12,6 @@
 
 #include "philo.h"
 
-// void *single_philo_wrapper(void *arg)
-// {
-//     single_philo(arg);
-//     return NULL;
-// }
-
 int	handle_thread_error(int status)
 {
 	if (status == 0)
@@ -36,13 +30,6 @@ int	handle_thread_error(int status)
 		print_error("Error: Wrong status for threading... 😓");
 	return (1);
 }
-
-// static void	*_philo_loop(t_philo *philo)
-// {
-// 	//cilo de vida
-
-// 	return(philo);
-// }
 
 int	threading(pthread_t *thread, void *(*foo)(void *),
 	void *data, t_opcode operation)

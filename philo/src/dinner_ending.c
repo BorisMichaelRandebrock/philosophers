@@ -38,8 +38,8 @@ void	restaurant_closing(t_table *table)
 	}
 	destroy_mutex(table);
 	print_colours("We hope you have enjoied the soirée, and shall\n"
-		 "		be delighted to be seeing you again very soon...\n", GREEN);
-		 printf("😃\n");
+		"		be delighted to be seeing you again very soon...\n", GREEN);
+	printf("😃\n");
 	if (table->forks)
 		free(table->forks);
 	if (table->philos)
@@ -47,12 +47,14 @@ void	restaurant_closing(t_table *table)
 	exit(0);
 }
 
-static void	final_speech()
+static void	final_speech(void)
 {
 	print_colours("We are deeply saddened by the loss of our valued guest.\n"
-		"    Our thoughts are with their loved ones during this difficult time.\n"
-		"	  We are here to offer any support and assistance we can.\n", MAGENTA);
-		 printf("		✞\n");
+		"    Our thoughts are with their loved ones during this difficult"
+		"time.\n"
+		"	  We are here to offer any support and assistance we can.\n",
+		MAGENTA);
+	printf("		✞\n");
 }
 
 void	funeral(t_table *table)

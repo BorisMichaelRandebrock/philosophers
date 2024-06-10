@@ -36,7 +36,7 @@ tleaks: all
 	@$(TEST_LEAKS) ./$(NAME) 5 800 200 200 5
 
 valgrind: all
-	@$(VALGRIND) ./$(NAME) 5 800 200 200 5
+	@$(VALGRIND) ./$(NAME) 5 1800 200 200 5
 
 viking: all
 	@$(VIKING) ./$(NAME) 5 800 200 200 5
@@ -46,8 +46,6 @@ ragnarok: all
 
 %.o: %.c
 	@$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS)
-# @$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS)
-# @$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS) $< -o $(OBJ_DIR)$@
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
@@ -60,5 +58,4 @@ fclean: clean
 
 re: fclean all
 
-#.PHONY: all clean fclean re	
 .PHONY: all clean fclean re tleaks valgrind viking ragnarok

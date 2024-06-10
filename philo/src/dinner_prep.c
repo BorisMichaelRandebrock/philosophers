@@ -22,7 +22,8 @@ int	thread_init(t_table *table)
 	philo = table->philos;
 	while (++i < table->number_of_philosophers)
 	{
-		if (threading(&philo[i].thread_id, &dinner_rules, &philo[i], CREATE) != 0)
+		if (threading(&philo[i].thread_id, &dinner_rules,
+				&philo[i], CREATE) != 0)
 			return (1);
 	}
 	return (0);
@@ -45,16 +46,14 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 	}
 }
 
-
 static void	philo_init(t_table *table)
 {
 	long	i;
-	t_philo *philo;
+	t_philo	*philo;
 
 	i = -1;
 	while (++i < table->number_of_philosophers)
 	{
-
 		philo = &table->philos[i];
 		philo->id = i + 1;
 		philo->last_meal = table->start_dinner;
@@ -68,7 +67,6 @@ static void	philo_init(t_table *table)
 
 static void	create_data_mtx(t_table *table)
 {
-
 	mutex_handle(&table->table_mutex, INIT);
 	mutex_handle(&table->print_mutex, INIT);
 	mutex_handle(&table->full_mtx, INIT);
@@ -80,7 +78,7 @@ int	init_table(t_table *table)
 {
 	int	i;
 
-	i = - 1;
+	i = -1;
 	table->philos_full = 0;
 	table->end_dinner = 0;
 	table->dead = false;

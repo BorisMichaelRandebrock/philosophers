@@ -38,9 +38,9 @@ void	print_colours(const char *str, const char *colour)
 	write(1, RES, sizeof(RES));
 }
 
-static bool getit(t_philo *philo)
+static bool	getit(t_philo *philo)
 {
-	get_bool(&philo->table->finish_mtx ,&philo->table->end_dinner);
+	get_bool(&philo->table->finish_mtx, &philo->table->end_dinner);
 	return (0);
 }
 
@@ -54,16 +54,15 @@ void	reporter(t_philosophers_state state, t_philo *philo)
 		return ;
 	else
 	{
-		if ((state == TAKE_LEFT_FORK ) && !getit(philo))
-			//&& !get_bool(&philo->table->finish_mtx ,&philo->table->end_dinner))
-			printf("Time: %-10ld %ld has taken the left fork ⋔\n", time, philo->id);
+		if ((state == TAKE_LEFT_FORK) && !getit(philo))
+			printf("Time: %-10ld %ld has taken the left fork ⋔\n", time,
+				philo->id);
 		else if ((state == TAKE_RIGHT_FORK) && !getit(philo))
-			//&& !get_bool(&philo->table->finish_mtx ,&philo->table->end_dinner))
-			printf("Time: %-10ld %ld has taken the right fork ⋔\n", time, philo->id);
+			printf("Time: %-10ld %ld has taken the right fork ⋔\n", time,
+				philo->id);
 		else if (state == EATING && !getit(philo))
-			//printf("Time: %-10ld %ld is eating... 🍝\n", time, philo->id);//TODO
 			printf("Time: %-10ld %ld is eating... 🍝 %ld\n", time, philo->id,
-			(philo->meals +1));//TODO
+				(philo->meals +1));
 		else if (state == SLEEPING && !getit(philo))
 			printf("Time: %-10ld %ld is sleeping... 💤\n", time, philo->id);
 		else if (state == THINKING && !getit(philo))

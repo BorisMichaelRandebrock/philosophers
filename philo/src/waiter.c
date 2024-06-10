@@ -32,7 +32,7 @@ void	philo_thinks(t_philo *philo, bool initial)
 bool	philo_dies(t_philo *philo)
 {
 	long	elapsed;
-	long 	time_to_die;
+	long	time_to_die;
 
 	elapsed = (gettime() - get_long(&philo->philo_mutex, &philo->last_meal));
 	time_to_die = philo->table->time_to_die / 1000;
@@ -42,7 +42,7 @@ bool	philo_dies(t_philo *philo)
 		reporter(DEAD, philo);
 		return (1);
 	}
-	return(0);
+	return (0);
 }
 
 void	waiter(t_table *table)

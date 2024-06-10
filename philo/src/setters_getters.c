@@ -12,8 +12,6 @@
 
 #include "philo.h"
 
-
-
 void	set_bool(type_mtx *mutex, bool *dest, bool value)
 {
 	mutex_handle(mutex, LOCK);
@@ -21,7 +19,7 @@ void	set_bool(type_mtx *mutex, bool *dest, bool value)
 	mutex_handle(mutex, UNLOCK);
 }
 
-bool	get_bool(type_mtx *mutex,  bool *value)
+bool	get_bool(type_mtx *mutex, bool *value)
 {
 	bool	return_value;
 
@@ -52,8 +50,8 @@ long	get_long(type_mtx *mutex, long *value)
 
 long	gettime(void)
 {
-	struct	timeval	time_val;
-	long	current_time;
+	struct timeval	time_val;
+	long			current_time;
 
 	if (gettimeofday(&time_val, NULL) != 0)
 	{
