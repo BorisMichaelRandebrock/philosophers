@@ -40,8 +40,7 @@ void	print_colours(const char *str, const char *colour)
 
 static bool	getit(t_philo *philo)
 {
-	get_bool(&philo->table->finish_mtx, &philo->table->end_dinner);
-	return (0);
+	return (get_bool(&philo->table->finish_mtx, &philo->table->end_dinner));
 }
 
 void	reporter(t_philosophers_state state, t_philo *philo)
