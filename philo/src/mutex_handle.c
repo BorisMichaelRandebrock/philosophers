@@ -29,7 +29,6 @@ int	mutex_error_check(int status)
 
 int	mutex_handle(type_mtx *mutex, t_opcode opcode)
 {
-
 	if (opcode == INIT)
 	{
 		if (pthread_mutex_init(mutex, NULL) != 0)
@@ -48,10 +47,7 @@ int	mutex_handle(type_mtx *mutex, t_opcode opcode)
 	else if (opcode == DESTROY)
 	{
 		if (pthread_mutex_destroy(mutex) != 0)
-		{
-			// printf("%ld", );˚ç
 			return (mutex_error_check(DESTROY));
-		}
 	}
 	return (0);
 }
