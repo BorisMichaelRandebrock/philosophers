@@ -16,12 +16,13 @@
 static void	destroy_mutex(t_table *table)
 {
 	mutex_handle(&table->table_mutex, DESTROY);
+	// mutex_handle(&table->waiter_mtx, DESTROY);
 	mutex_handle(&table->print_mutex, DESTROY);
 	mutex_handle(&table->full_mtx, DESTROY);
 	mutex_handle(&table->finish_mtx, DESTROY);
 }
 
-void	restaurant_closing(t_table *table)
+int	restaurant_closing(t_table *table)
 {
 	t_philo	*philo;
 	int		i;
@@ -44,7 +45,7 @@ void	restaurant_closing(t_table *table)
 		free(table->forks);
 	if (table->philos)
 		free(table->philos);
-	exit(0);
+	return (0);
 }
 
 static void	final_speech(void)
@@ -57,7 +58,7 @@ static void	final_speech(void)
 	printf("		✞\n");
 }
 
-void	funeral(t_table *table)
+int	funeral(t_table *table)
 {
 	t_philo	*philo;
 	int		i;
@@ -78,5 +79,5 @@ void	funeral(t_table *table)
 	if (table->philos)
 		free(table->philos);
 	final_speech();
-	exit(0);
+	return (0);
 }

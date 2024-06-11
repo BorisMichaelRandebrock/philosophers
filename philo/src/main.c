@@ -73,8 +73,10 @@ int	main(int argc, char **argv)
 	clear_terminal();
 	if (argc < 5 || argc > 6)
 		print_error("Error: Wrong number of arguments");
-	error_parsing(&table, argv);
+	if (error_parsing(&table, argv) != 0)
+		return (1);
 	conversation();
 	init_table(&table);
 	waiter(&table);
+	return (0);
 }

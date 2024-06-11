@@ -37,11 +37,15 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 	if (philo->id == 1)
 	{
 		philo->right_fork = &forks[philo_position];
-		philo->left_fork = &forks[philo_nbr];
+		// printf("First right: %d\n", forks[philo_position].fork_id);
+		// printf("First left: %d\n", forks[philo_nbr - 1].fork_id);
+		philo->left_fork = &forks[philo_nbr - 1];
 	}
 	else
 	{
-		philo->right_fork = &forks[(philo_position)];
+		// printf("Pointer right: %d\n", forks[philo_position].fork_id);
+		// printf("Pointer left: %d\n", forks[philo_position - 1].fork_id);
+		philo->right_fork = &forks[philo_position];
 		philo->left_fork = &forks[philo_position - 1];
 	}
 }
@@ -68,6 +72,7 @@ static void	philo_init(t_table *table)
 static void	create_data_mtx(t_table *table)
 {
 	mutex_handle(&table->table_mutex, INIT);
+//	mutex_handle(&table->waiter_mtx, INIT);
 	mutex_handle(&table->print_mutex, INIT);
 	mutex_handle(&table->full_mtx, INIT);
 	mutex_handle(&table->finish_mtx, INIT);
@@ -89,7 +94,7 @@ int	init_table(t_table *table)
 	while (++i < table->number_of_philosophers)
 	{
 		mutex_handle(&table->forks[i].fork, INIT);
-		table->forks[i].fork_id = i;
+		table->forks[i].fork_id = i + 1;
 	}
 	table->philos = malloc(sizeof(t_philo) * table->number_of_philosophers);
 	if (!table->philos)

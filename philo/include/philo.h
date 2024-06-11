@@ -101,25 +101,23 @@ typedef struct s_table
 	type_mtx print_mutex;
 	type_mtx full_mtx;
 	type_mtx finish_mtx;
+	//type_mtx waiter_mtx;// ?
 } 	t_table;
 
 // ->main.c
 void clear_terminal(void);
 
 // ->error_parsing.c
-void error_parsing(t_table *table, char **argv);
+int error_parsing(t_table *table, char **argv);
 
 // ->print_utils.c
 int ft_strlen(const char *str);
-void print_error(const char *str);
+int print_error(const char *str);
 void print_colours(const char *str, const char *colour);
 void reporter(t_philosophers_state state, t_philo *philo);
 
 // ->dinner_prep.c
-//int	dinner_prep(t_table *table);
 int	init_table(t_table *table);
-
-
 
 // ->mutex_handle.c
 int	mutex_error_check(int status);
@@ -147,14 +145,10 @@ void increase_long(type_mtx *mutex, long *value);
 // ->waiter.c
 void philo_thinks(t_philo *philo, bool initial);
 bool philo_dies(t_philo *philo);
-// void philo_eats(t_philo *philo);
-// bool dinner_finished(t_table *table);
 void waiter(t_table *table);
 
-
-
 // ->dinner_ending.c
-void restaurant_closing(t_table *table);
-void funeral(t_table *table);
+int restaurant_closing(t_table *table);
+int funeral(t_table *table);
 
 #endif

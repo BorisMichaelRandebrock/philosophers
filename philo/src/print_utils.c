@@ -23,10 +23,10 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-void	print_error(const char *str)
+int	print_error(const char *str)
 {
 	printf(RED"%s"RES, str);
-	exit(1);
+	return (1);
 }
 
 void	print_colours(const char *str, const char *colour)

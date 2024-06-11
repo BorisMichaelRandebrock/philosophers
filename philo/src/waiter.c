@@ -51,6 +51,9 @@ void	waiter(t_table *table)
 	{
 		if (get_bool(&table->dead_filo_mutex, &table->dead))
 		{
+			// pthread_mutex_lock(&table->finish_mtx);
+			// set_bool(NULL, &table->end_dinner, true);
+			// pthread_mutex_lock(&table->finish_mtx);
 			set_bool(&table->finish_mtx, &table->end_dinner, true);
 			funeral(table);
 		}
@@ -61,4 +64,19 @@ void	waiter(t_table *table)
 			restaurant_closing(table);
 		}
 	}
+	// while (!table->end_dinner)
+	// {
+	// 	if (table->dead)
+	// 	{
+	// 		table->end_dinner = true;
+	// 		exit(0);
+	// 		funeral(table);
+	// 	}
+	// 	else if (table->philos_full == table->number_of_philosophers)
+	// 	{
+	// 		table->end_dinner = true;
+	// 		exit(0);
+	// 		restaurant_closing(table);
+	// 	}
+	// }
 }
