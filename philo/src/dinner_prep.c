@@ -37,14 +37,10 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 	if (philo->id == 1)
 	{
 		philo->right_fork = &forks[philo_position];
-		// printf("First right: %d\n", forks[philo_position].fork_id);
-		// printf("First left: %d\n", forks[philo_nbr - 1].fork_id);
 		philo->left_fork = &forks[philo_nbr - 1];
 	}
 	else
 	{
-		// printf("Pointer right: %d\n", forks[philo_position].fork_id);
-		// printf("Pointer left: %d\n", forks[philo_position - 1].fork_id);
 		philo->right_fork = &forks[philo_position];
 		philo->left_fork = &forks[philo_position - 1];
 	}
@@ -72,7 +68,6 @@ static void	philo_init(t_table *table)
 static void	create_data_mtx(t_table *table)
 {
 	mutex_handle(&table->table_mutex, INIT);
-//	mutex_handle(&table->waiter_mtx, INIT);
 	mutex_handle(&table->print_mutex, INIT);
 	mutex_handle(&table->full_mtx, INIT);
 	mutex_handle(&table->finish_mtx, INIT);

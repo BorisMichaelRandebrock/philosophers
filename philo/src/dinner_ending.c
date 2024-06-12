@@ -16,7 +16,6 @@
 static void	destroy_mutex(t_table *table)
 {
 	mutex_handle(&table->table_mutex, DESTROY);
-	// mutex_handle(&table->waiter_mtx, DESTROY);
 	mutex_handle(&table->print_mutex, DESTROY);
 	mutex_handle(&table->full_mtx, DESTROY);
 	mutex_handle(&table->finish_mtx, DESTROY);
@@ -52,7 +51,7 @@ static void	final_speech(void)
 {
 	print_colours("We are deeply saddened by the loss of our valued guest.\n"
 		"    Our thoughts are with their loved ones during this difficult"
-		"time.\n"
+		" time.\n"
 		"	  We are here to offer any support and assistance we can.\n",
 		MAGENTA);
 	printf("		✞\n");

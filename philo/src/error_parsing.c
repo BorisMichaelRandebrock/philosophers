@@ -40,7 +40,7 @@ static int	meal_amounts(t_table *table, char *meals)
 	table->amount_of_meals = ft_atol(meals);
 	if (table->amount_of_meals == 0)
 		if (print_error("As nobody wants to eat anything..\n"
-			" 				we wish you a very nice evening.\n") ==  1)
+				" 				we wish you a very nice evening.\n") == 1)
 			return (1);
 	return (0);
 }
