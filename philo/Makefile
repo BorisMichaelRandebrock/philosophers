@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 14:16:18 by brandebr          #+#    #+#              #
-#    Updated: 2024/05/31 18:03:04 by brandebr         ###   ########.fr        #
+#    Updated: 2024/06/11 18:35:51 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,14 @@ NAME = philo
 
 INC_DIR	= include/
 SRC_DIR = src/
+OBJ_DIR = obj/
 
 SRC = main.c print_utils.c error_parsing.c dinner_prep.c mutex_handle.c dinner_ending.c\
-		dinner_starting.c setters_getters.c waiter.c sync_utils.c threading.c 
+		dinner_starting.c setters_getters.c waiter.c utils.c threading.c 
 
-OBJ = $(addprefix $(SRC_DIR), $(SRC:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-CC = gcc -g -lpthread -fsanitize=thread 
+CC = gcc -g -lpthread #-fsanitize=thread 
 TEST_LEAKS	:= leaks -atExit --
 TEST_ARGS ?= argv
 
@@ -44,7 +45,8 @@ viking: all
 ragnarok: all
 	@$(RAGNAROK) ./$(NAME) 5 800 200 200 5
 
-%.o: %.c Makefile
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
+	@mkdir -p $(OBJ_DIR)
 	$(CC) -I $(INC_DIR) -c $< -o $@ $(FLAGS) 
 
 $(NAME): $(OBJ)

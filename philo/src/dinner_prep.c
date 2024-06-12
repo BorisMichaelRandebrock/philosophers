@@ -37,11 +37,11 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 	if (philo->id == 1)
 	{
 		philo->right_fork = &forks[philo_position];
-		philo->left_fork = &forks[philo_nbr];
+		philo->left_fork = &forks[philo_nbr - 1];
 	}
 	else
 	{
-		philo->right_fork = &forks[(philo_position)];
+		philo->right_fork = &forks[philo_position];
 		philo->left_fork = &forks[philo_position - 1];
 	}
 }
@@ -89,7 +89,7 @@ int	init_table(t_table *table)
 	while (++i < table->number_of_philosophers)
 	{
 		mutex_handle(&table->forks[i].fork, INIT);
-		table->forks[i].fork_id = i;
+		table->forks[i].fork_id = i + 1;
 	}
 	table->philos = malloc(sizeof(t_philo) * table->number_of_philosophers);
 	if (!table->philos)

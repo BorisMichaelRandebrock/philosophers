@@ -21,7 +21,7 @@ static void	destroy_mutex(t_table *table)
 	mutex_handle(&table->finish_mtx, DESTROY);
 }
 
-void	restaurant_closing(t_table *table)
+int	restaurant_closing(t_table *table)
 {
 	t_philo	*philo;
 	int		i;
@@ -44,20 +44,20 @@ void	restaurant_closing(t_table *table)
 		free(table->forks);
 	if (table->philos)
 		free(table->philos);
-	exit(0);
+	return (0);
 }
 
 static void	final_speech(void)
 {
 	print_colours("We are deeply saddened by the loss of our valued guest.\n"
 		"    Our thoughts are with their loved ones during this difficult"
-		"time.\n"
+		" time.\n"
 		"	  We are here to offer any support and assistance we can.\n",
 		MAGENTA);
 	printf("		✞\n");
 }
 
-void	funeral(t_table *table)
+int	funeral(t_table *table)
 {
 	t_philo	*philo;
 	int		i;
@@ -78,5 +78,5 @@ void	funeral(t_table *table)
 	if (table->philos)
 		free(table->philos);
 	final_speech();
-	exit(0);
+	return (0);
 }
