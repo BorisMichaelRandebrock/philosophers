@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:00:48 by brandebr          #+#    #+#             */
-/*   Updated: 2024/05/30 10:46:50 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:59:30 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ static void	conversation(void)
 	printf("🍝\n");
 }
 */
-static void conversation(void)
+
+static void	conversation(void)
 {
-		usleep(6000000);
-		clear_terminal(); 
-		print_colours("\nSince everybody is seated...\n", WHITE);
-		usleep(800000);
-		print_colours("	& orders are taken:\n\n", WHITE);
-		usleep(800000);
-		print_colours("Let's start the Dinner ", GREEN);
-		printf("🍝\n");
-		usleep(1000000);
+	usleep(6000000);
+	clear_terminal();
+	print_colours("\nSince everybody is seated...\n", WHITE);
+	usleep(800000);
+	print_colours("	& orders are taken:\n\n", WHITE);
+	usleep(800000);
+	print_colours("Let's start the Dinner ", GREEN);
+	printf("🍝\n");
+	usleep(1000000);
 }
 
 int	main(int argc, char **argv)
