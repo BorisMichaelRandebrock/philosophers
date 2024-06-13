@@ -90,5 +90,3 @@ Initial deadlock is avoided by sending even philos to a short slumber.
 
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue to discuss improvements or bugs.
-![dining_philosophers](https://github.com/BorisMichaelRandebrock/philosophers/assets/98555508/fc8565b9-59f5-448c-8037-416af1e687a2)
-
