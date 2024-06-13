@@ -17,16 +17,14 @@ void	clear_terminal(void)
 {
 	write(1, "\033[2J\033[H", 8);
 }
-/*
-static void	conversation(void)
+
+/*static void	conversation(void)
 {
 	print_colours("	& orders are taken:\n\n", WHITE);
 	print_colours("\nSince everybody is seated...\n", WHITE);
 	print_colours("Let's start the Dinner ", GREEN);
 	printf("🍝\n");
-}
-*/
-
+}*/
 static void	conversation(void)
 {
 	usleep(6000000);
@@ -46,7 +44,8 @@ int	main(int argc, char **argv)
 
 	clear_terminal();
 	if (argc < 5 || argc > 6)
-		print_error("Error: Wrong number of arguments");
+		if (print_error("Error: Wrong number of arguments") != 0)
+			return (1);
 	if (error_parsing(&table, argv) != 0)
 		return (1);
 	conversation();
