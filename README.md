@@ -5,6 +5,9 @@ The problem illustrates synchronization issues and potential deadlocks in concur
 
 ## Table of Contents
 
+<img align="right" src="https://github.com/BorisMichaelRandebrock/philosophers/assets/98555508/fc8565b9-59f5-448c-8037-416af1e687a2"
+     alt="5 Philosophos around a table with 5 plates and 5 forks"  width="400" height="400">
+
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -87,4 +90,5 @@ Initial deadlock is avoided by sending even philos to a short slumber.
 
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue to discuss improvements or bugs.
+![dining_philosophers](https://github.com/BorisMichaelRandebrock/philosophers/assets/98555508/fc8565b9-59f5-448c-8037-416af1e687a2)
 
