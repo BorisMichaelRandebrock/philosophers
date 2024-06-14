@@ -18,7 +18,7 @@ The problem illustrates synchronization issues and potential deadlocks in concur
 
 ## Introduction
 
-The Dining Philosophers problem involves five philosophers sitting at a table who do nothing but eat, sleep &  think.  
+The Dining Philosophers problem involves five philosophers (actually... any number between 1 and 200 - a lonely philo can not eat though...) sitting at a table who do nothing but eat, sleep &  think.  
    Between each pair of philosophers, there is a fork. A philosopher must pick up both forks to eat.  
     The problem is to design a protocol such that no philosopher will starve and the system will not deadlock.
 
